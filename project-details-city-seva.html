@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>City Seva App: Citizen Services App | Bishwajeet Gupta</title>
+    <meta name="AdsBot-Google" content="noindex follow" />
+    <meta name="description" content="Case study: City Seva App, a citizen services app for city residents, by Bishwajeet Gupta">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="City Seva App: Citizen Services App | Bishwajeet Gupta">
+    <meta property="og:description" content="Case study: City Seva App, a citizen services app for city residents, by Bishwajeet Gupta">
+    <meta property="og:image" content="assets/images/case-study/portfolios/hero-city-seva.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/webp" href="assets/images/favicon.webp" />
+
+    <!-- Font CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Syne:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Library CSS -->
+    <link rel="stylesheet" href="assets/css/lib/bootstrap.css">
+    <link rel="stylesheet" href="assets/css/lib/animate.css">
+
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- Case study CSS (scoped to .cs-page) -->
+    <style>
+
+  /* Case study block. Element styles from Bootstrap and style.css are reverted inside .cs-page */
+  .cs-page { display: block; line-height: normal; font-size: 16px; font-weight: 400; letter-spacing: normal; text-align: left; color: #000; }
+  .cs-page :where(h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, dt, dd, table, thead, tbody, tr, th, td, figure, figcaption, blockquote, small, strong, b, em, i, span, label, section, header, footer, article, aside, nav, button) { all: revert; }
+  .cs-page .js-lightbox { cursor: zoom-in; }
+  .cs-page a.cs-rel-link { display: contents; color: inherit; text-decoration: none; cursor: pointer; }
+  .cs-page a.cs-rel-link:hover h3, .cs-page a.cs-rel-link:hover h4 { text-decoration: underline; text-underline-offset: 4px; }
+
+
+  
+  .cs-page {
+    --blue: #1483f4;      
+    --orange: #f05a21;    
+    --navy: #26395e;      
+    --steel: #496b96;     
+    --tint: #f3f9ff;      
+    --white: #ffffff;
+    --text: #26395e;
+    --body: #4a5a76;
+    --line: #dbe6f3;
+    --pad: clamp(24px, 5.71vw, 80px);
+    --col-gap: clamp(16px, 2.29vw, 32px);
+  }
+  .cs-page, .cs-page * { box-sizing: border-box; margin: 0; padding: 0; }
+  .cs-page { background: var(--white); color: var(--text); font-family: "Open Sans", "Segoe UI", Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+  .cs-page img { display: block; max-width: 100%; }
+  .cs-page .page { width: 100%; max-width: 1400px; margin: 0 auto; background: var(--white); }
+  .cs-page section { position: relative; overflow: hidden; padding: var(--pad); }
+  .cs-page .cs-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--col-gap); }
+
+  .cs-page h2 { font-size: clamp(36px, 4.29vw, 60px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.05; color: var(--navy); }
+  .cs-page p.body { font-size: clamp(16px, 1.29vw, 18px); line-height: 1.75; color: var(--body); }
+  .cs-page p.body + p.body { margin-top: 18px; }
+  .cs-page .list { list-style: none; margin-top: 28px; border-top: 1px solid var(--line); }
+  .cs-page .list li { display: flex; gap: 16px; align-items: baseline; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: clamp(16px, 1.29vw, 18px); font-weight: 700; color: var(--navy); line-height: 1.45; }
+  .cs-page .list li::before { content: ""; width: 8px; height: 8px; background: var(--blue); flex-shrink: 0; transform: translateY(-2px); }
+
+  
+  .cs-page .phone { aspect-ratio: 375 / 812; background: #0f1a2e; border-radius: 13% / 6%; padding: 3.2%; box-shadow: 0 30px 60px rgba(15, 26, 46, .28); overflow: hidden; }
+  .cs-page .phone .scr { width: 100%; height: 100%; border-radius: 10.5% / 4.9%; overflow: hidden; background: #fff; }
+  .cs-page .phone .scr img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .cs-page .browser { width: 100%; border-radius: 10px; overflow: hidden; background: #fff; box-shadow: 0 24px 50px rgba(15, 26, 46, .16); display: flex; flex-direction: column; }
+  .cs-page .browser .bar { height: 34px; background: #e9eef5; display: flex; align-items: center; gap: 7px; padding: 0 14px; flex-shrink: 0; }
+  .cs-page .browser .bar i { width: 11px; height: 11px; border-radius: 50%; background: #c3cedc; flex-shrink: 0; }
+  .cs-page .browser .view { aspect-ratio: 1440 / 880; overflow: hidden; }
+  .cs-page .browser .view img { width: 100%; height: 100%; object-fit: cover; object-position: top left; }
+
+  
+  .cs-page .crop { position: relative; overflow: hidden; aspect-ratio: var(--w) / var(--h); background: #fff; border-radius: 12px; }
+  .cs-page .crop img { position: absolute; max-width: none; width: calc(var(--sw) / var(--w) * 100%); left: calc(var(--x) / var(--w) * -100%); top: calc(var(--y) / var(--h) * -100%); }
+  .cs-page .caption { font-size: 14px; font-weight: 600; color: var(--body); margin-top: 14px; }
+  .cs-page .caption b { color: var(--navy); font-weight: 700; margin-right: 6px; }
+
+  
+  .cs-page .logo { width: 185px; height: 54px; position: relative; overflow: hidden; }
+  .cs-page .logo img { position: absolute; max-width: none; width: 375px; left: -105px; top: -62px; }
+
+  
+  .cs-page .cover { background: var(--blue); color: #fff; padding-bottom: 0; min-height: min(900px, 64.29vw); }
+  .cs-page .cover .cs-grid { align-items: end; }
+  .cs-page .cover-text { grid-column: 1 / span 6; align-self: start; padding-bottom: var(--pad); }
+  .cs-page .logo-plate { display: inline-block; background: #fff; border-radius: 10px; padding: 10px 16px 10px 10px; }
+  .cs-page .cover .meta { margin-top: clamp(40px, 5.71vw, 80px); font-size: 15px; font-weight: 600; color: rgba(255,255,255,.85); }
+  .cs-page .cover h1 { font-size: clamp(54px, 7.14vw, 100px); font-weight: 800; letter-spacing: -0.035em; line-height: .98; margin-top: 14px; }
+  .cs-page .cover .sub { font-size: clamp(20px, 1.86vw, 26px); font-weight: 400; margin-top: 18px; color: #fff; }
+  .cs-page .info { margin-top: clamp(40px, 5vw, 70px); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid rgba(255,255,255,.35); }
+  .cs-page .info div { padding: 16px 16px 16px 0; border-bottom: 1px solid rgba(255,255,255,.35); }
+  .cs-page .info div:nth-child(odd) { border-right: 1px solid rgba(255,255,255,.35); }
+  .cs-page .info div:nth-child(even) { padding-left: 20px; }
+  .cs-page .info .wide { grid-column: span 2; border-right: 0 !important; }
+  .cs-page .info small { display: block; font-size: 13px; font-weight: 600; color: rgba(255,255,255,.75); margin-bottom: 4px; }
+  .cs-page .info b { font-size: 18px; font-weight: 700; }
+  .cs-page .cover-devices { grid-column: 7 / span 6; position: relative; height: 100%; min-height: min(780px, 55.71vw); }
+  .cs-page .cover-devices .phone { position: absolute; bottom: max(-160px, -11.43vw); }
+  .cs-page .cover-devices .p-back { width: min(300px, 21.43vw); right: 0; bottom: max(-60px, -4.29vw); }
+  .cs-page .cover-devices .p-front { width: min(360px, 25.71vw); left: 4%; box-shadow: 0 40px 80px rgba(8, 40, 90, .45); }
+
+  
+  .cs-page .product { background: var(--tint); padding-top: clamp(48px, 5.71vw, 80px); }
+  .cs-page .product .cs-grid { align-items: end; margin-bottom: clamp(28px, 3.43vw, 48px); }
+  .cs-page .product h2 { grid-column: 1 / span 6; }
+  .cs-page .product p.body { grid-column: 8 / span 5; }
+  .cs-page .product img.hero { width: 100%; border-radius: 12px; }
+
+  
+  .cs-page .overview .cs-grid { row-gap: 48px; }
+  .cs-page .ov-text { grid-column: 1 / span 6; }
+  .cs-page .ov-text h2 { margin-bottom: 28px; }
+  .cs-page .ov-media { grid-column: 8 / span 5; }
+  .cs-page .ov-media .crop { box-shadow: 0 20px 50px rgba(15, 26, 46, .12); border: 1px solid var(--line); }
+
+  
+  .cs-page .approach { background: var(--navy); color: #fff; }
+  .cs-page .approach h2 { color: #fff; }
+  .cs-page .approach p.body { color: rgba(255,255,255,.82); }
+  .cs-page .approach .list { border-top-color: rgba(255,255,255,.2); }
+  .cs-page .approach .list li { color: #fff; border-bottom-color: rgba(255,255,255,.2); }
+  .cs-page .approach .list li::before { background: var(--orange); }
+  .cs-page .ap-text { grid-column: 1 / span 5; }
+  .cs-page .ap-text h2 { margin-bottom: 28px; }
+  .cs-page .ap-media { grid-column: 7 / span 6; display: grid; grid-template-columns: 1fr 1fr; gap: var(--col-gap); align-content: start; }
+  .cs-page .ap-media .crop { box-shadow: 0 20px 40px rgba(0,0,0,.25); }
+  .cs-page .ap-media .tall { grid-row: span 2; }
+  .cs-page .approach .caption { color: rgba(255,255,255,.7); }
+  .cs-page .approach .caption b { color: #fff; }
+
+  
+  .cs-page .screens-intro .cs-grid { align-items: end; }
+  .cs-page .screens-intro h2 { grid-column: 1 / span 6; }
+  .cs-page .screens-intro p.body { grid-column: 8 / span 5; }
+  .cs-page .lineup { background: var(--blue); padding-top: clamp(48px, 5.71vw, 80px); }
+  .cs-page .lineup .head { display: flex; justify-content: space-between; color: #fff; font-size: 15px; font-weight: 700; margin-bottom: clamp(32px, 4vw, 56px); }
+  .cs-page .lineup .head span:last-child { font-weight: 400; color: rgba(255,255,255,.8); }
+  .cs-page .row5 { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--col-gap); align-items: start; }
+  .cs-page .row5 figure:nth-child(even) { margin-top: min(72px, 5.14vw); }
+  .cs-page .row5 figcaption, .cs-page .web figcaption { margin-top: 16px; font-size: 15px; font-weight: 700; color: #fff; }
+  .cs-page .row5 figcaption span, .cs-page .web figcaption span { font-weight: 400; opacity: .75; margin-right: 8px; }
+  .cs-page .web { background: var(--tint); }
+  .cs-page .web .head { display: flex; justify-content: space-between; font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: clamp(28px, 3.43vw, 48px); }
+  .cs-page .web .head span:last-child { font-weight: 400; color: var(--body); }
+  .cs-page .web-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(32px, 4vw, 56px) var(--col-gap); }
+  .cs-page .web-grid figure:nth-child(1) { grid-column: 1 / span 6; }
+  .cs-page .web-grid figure:nth-child(2) { grid-column: 7 / span 6; }
+  .cs-page .web-grid figure:nth-child(3) { grid-column: 1 / span 8; }
+  .cs-page .web-grid .detail { grid-column: 9 / span 4; align-self: center; }
+  .cs-page .web-grid .detail .crop { box-shadow: 0 24px 50px rgba(15, 26, 46, .2); }
+  .cs-page .web figcaption { color: var(--navy); }
+
+  
+  .cs-page .cs .cs-grid { row-gap: 40px; }
+  .cs-page .cs h2 { grid-column: 1 / span 12; margin-bottom: clamp(8px, 1.43vw, 20px); }
+  .cs-page .step { grid-column: span 5; padding-top: 22px; border-top: 4px solid var(--line); }
+  .cs-page .step.solution { border-top-color: var(--blue); }
+  .cs-page .step h3 { font-size: clamp(22px, 1.86vw, 26px); font-weight: 800; color: var(--navy); margin-bottom: 14px; }
+  .cs-page .step.solution h3 { color: var(--blue); }
+  .cs-page .step-arrow { grid-column: span 2; display: flex; align-items: center; justify-content: center; padding-top: 26px; }
+  .cs-page .step-arrow svg { width: 100%; max-width: 120px; height: 24px; color: var(--blue); }
+  .cs-page .cs-media { grid-column: 1 / span 12; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--col-gap); background: var(--tint); border-radius: 14px; padding: clamp(24px, 3.43vw, 48px); align-items: center; }
+  .cs-page .cs-media .phone { grid-column: 2 / span 3; }
+  .cs-page .cs-media .crop { grid-column: 6 / span 6; box-shadow: 0 20px 50px rgba(15, 26, 46, .12); border: 1px solid var(--line); }
+
+  
+  .cs-page .delivery { background: var(--tint); }
+  .cs-page .delivery .cs-grid { align-items: end; }
+  .cs-page .delivery h2 { grid-column: 1 / span 6; }
+  .cs-page .delivery .lead-col { grid-column: 8 / span 5; }
+  .cs-page .track { margin-top: clamp(40px, 4.57vw, 64px); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--col-gap); position: relative; }
+  .cs-page .track::before { content: ""; position: absolute; left: 0; right: 0; top: 9px; height: 2px; background: var(--blue); }
+  .cs-page .stage { position: relative; padding-top: 40px; }
+  .cs-page .stage::before { content: ""; position: absolute; left: 0; top: 0; width: 20px; height: 20px; border-radius: 50%; background: #fff; border: 5px solid var(--blue); box-sizing: border-box; }
+  .cs-page .stage:last-child::before { background: var(--blue); }
+  .cs-page .stage .when { font-size: 14px; font-weight: 700; color: var(--blue); }
+  .cs-page .stage h3 { font-size: clamp(20px, 1.71vw, 24px); font-weight: 800; color: var(--navy); margin: 6px 0 10px; }
+  .cs-page .stage p { font-size: 16px; line-height: 1.65; color: var(--body); }
+  .cs-page .duration { margin-top: clamp(36px, 4vw, 56px); display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; padding-top: 24px; border-top: 1px solid var(--line); }
+  .cs-page .duration b { font-size: clamp(40px, 4.29vw, 60px); font-weight: 800; color: var(--blue); letter-spacing: -0.02em; line-height: 1; }
+  .cs-page .duration span { font-size: 18px; font-weight: 600; color: var(--navy); }
+
+  
+  .cs-page .conclusion .cs-grid { row-gap: 32px; }
+  .cs-page .conclusion h2 { grid-column: 1 / span 12; }
+  .cs-page .con-a { grid-column: 1 / span 6; }
+  .cs-page .con-b { grid-column: 7 / span 6; margin-top: 0 !important; }
+  .cs-page .closing { margin-top: clamp(40px, 5vw, 70px); background: var(--blue); border-radius: 14px; padding: clamp(28px, 4vw, 56px) clamp(24px, 4vw, 56px) 0; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--col-gap); align-items: end; overflow: hidden; }
+  .cs-page .closing .browser { grid-column: 1 / span 8; border-radius: 10px 10px 0 0; box-shadow: none; }
+  .cs-page .closing .phone { grid-column: 9 / span 3; margin-bottom: clamp(24px, 3.43vw, 48px); }
+  .cs-page .credit { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; align-items: center; margin-top: clamp(32px, 3.43vw, 48px); padding-top: 22px; border-top: 1px solid var(--line); font-size: 14px; font-weight: 600; color: var(--body); }
+
+  
+  .cs-page .related { background: var(--navy); color: #fff; }
+  .cs-page .related h2 { color: #fff; }
+  .cs-page .rel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--col-gap); margin-top: clamp(28px, 3.43vw, 48px); }
+  .cs-page .rel .im { border-radius: 12px; overflow: hidden; aspect-ratio: 3 / 2; }
+  .cs-page .rel .im img { width: 100%; height: 100%; object-fit: cover; }
+  .cs-page .rel .rtags { margin: 20px 0 8px; font-size: 13px; font-weight: 700; letter-spacing: .06em; color: rgba(255,255,255,.7); }
+  .cs-page .rel .rtags span + span::before { content: "/"; margin: 0 10px; color: var(--orange); }
+  .cs-page .rel h3 { font-size: clamp(22px, 2vw, 28px); font-weight: 800; }
+
+  
+  @media (max-width: 1200px) {
+    .cs-page .ap-text { grid-column: 1 / span 12; margin-bottom: 40px; }
+    .cs-page .ap-media { grid-column: 1 / span 12; grid-template-columns: 1fr 1fr 1fr; }
+    .cs-page .ap-media .tall { grid-row: auto; }
+    .cs-page .ap-text .list { columns: 2; column-gap: var(--col-gap); }
+    .cs-page .ap-text .list li { break-inside: avoid; }
+  }
+  @media (max-width: 1024px) {
+    .cs-page .cover { min-height: 0; }
+    .cs-page .cover-text { grid-column: 1 / span 12; }
+    .cs-page .cover-devices { grid-column: 1 / span 12; min-height: 0; height: 78vw; }
+    .cs-page .cover-devices .p-front { width: 36vw; left: 12%; bottom: -14vw; }
+    .cs-page .cover-devices .p-back { width: 30vw; right: 12%; bottom: -6vw; }
+    .cs-page .product h2, .cs-page .product p.body, .cs-page .screens-intro h2, .cs-page .screens-intro p.body, .cs-page .delivery h2, .cs-page .delivery .lead-col { grid-column: 1 / span 12; }
+    .cs-page .product p.body, .cs-page .screens-intro p.body, .cs-page .delivery .lead-col { margin-top: 20px; }
+    .cs-page .ov-text { grid-column: 1 / span 12; }
+    .cs-page .ov-media { grid-column: 2 / span 10; }
+    .cs-page .row5 { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px var(--col-gap); }
+    .cs-page .row5 figure { flex: 0 0 calc((100% - 2 * var(--col-gap)) / 3); }
+    .cs-page .row5 figure:nth-child(even) { margin-top: 0; }
+    .cs-page .web-grid figure:nth-child(1), .cs-page .web-grid figure:nth-child(2) { grid-column: span 12; }
+    .cs-page .web-grid figure:nth-child(3) { grid-column: 1 / span 12; }
+    .cs-page .web-grid .detail { grid-column: 3 / span 8; }
+    .cs-page .track { grid-template-columns: 1fr 1fr; row-gap: 40px; }
+    .cs-page .track::before { display: none; }
+    .cs-page .stage { border-top: 2px solid var(--blue); padding-top: 32px; }
+    .cs-page .stage::before { top: -11px; }
+    .cs-page .cs-media .phone { grid-column: 1 / span 4; }
+    .cs-page .cs-media .crop { grid-column: 5 / span 8; }
+  }
+  @media (max-width: 768px) {
+    .cs-page .step { grid-column: 1 / span 12; }
+    .cs-page .step-arrow { grid-column: 1 / span 12; padding-top: 0; justify-content: flex-start; }
+    .cs-page .step-arrow svg { transform: rotate(90deg); width: 40px; }
+    .cs-page .con-a, .cs-page .con-b { grid-column: 1 / span 12; }
+    .cs-page .conclusion .cs-grid { row-gap: 18px; }
+    .cs-page .closing .browser { grid-column: 1 / span 12; }
+    .cs-page .closing .phone { display: none; }
+    .cs-page .rel-grid { grid-template-columns: 1fr; }
+    .cs-page .ap-media { grid-template-columns: 1fr 1fr; }
+    .cs-page .ap-text .list { columns: 1; }
+    .cs-page .info b { font-size: 16px; }
+  }
+  @media (max-width: 480px) {
+    .cs-page .info { grid-template-columns: 1fr; }
+    .cs-page .info div { border-right: 0 !important; padding-left: 0 !important; }
+    .cs-page .info .wide { grid-column: auto; }
+    .cs-page .cover-devices { height: 92vw; }
+    .cs-page .cover-devices .p-front { width: 46vw; left: 4%; bottom: -18vw; }
+    .cs-page .cover-devices .p-back { width: 38vw; right: 4%; bottom: -8vw; }
+    .cs-page .row5 figure { flex: 0 0 calc((100% - var(--col-gap)) / 2); }
+    .cs-page .ap-media { grid-template-columns: 1fr; }
+    .cs-page .track { grid-template-columns: 1fr; }
+    .cs-page .cs-media .phone { grid-column: 3 / span 8; }
+    .cs-page .cs-media .crop { grid-column: 1 / span 12; }
+    .cs-page .ov-media, .cs-page .web-grid .detail { grid-column: 1 / span 12; }
+    .cs-page .logo { transform: scale(.85); transform-origin: left center; }
+    .cs-page .web .head, .cs-page .lineup .head { flex-direction: column; gap: 4px; }
+  }
+
+  
+  @media (min-width: 768px) {
+    .cs-page .rel-grid { grid-template-columns: 1fr 1fr; }
+    .cs-page .g12 > .rel { grid-column: span 6; }
+    .cs-page .g12 > .rel + .rel { margin-top: 0; }
+  }
+  @media (max-width: 767.98px) {
+    .cs-page .rel-grid { grid-template-columns: 1fr; }
+  }
+
+    </style>
+</head>
+
+<body>
+    <div class="overflow-x-hidden">
+        <!-- Header start: markup lives in assets/js/layout.js -->
+        <div data-include="header" data-header-style="detail"></div>
+        <!-- Header end -->
+
+        <!-- Case study start -->
+        <main class="cs-page">
+<div class="page">
+
+  <!-- Cover -->
+  <section data-no-lightbox class="cover">
+    <div class="cs-grid">
+      <div class="cover-text">
+        <div class="logo-plate"><div class="logo"><img decoding="async" src="assets/images/case-study/projects/city-seva/splash.jpg" alt="City Seva logo"></div></div>
+        <div class="meta">Mobile App / Citizen Services</div>
+        <h1>City Seva App</h1>
+        <div class="sub">Citizen Services App</div>
+        <div class="info">
+          <div><small>Client</small><b>Academic Institution</b></div>
+          <div><small>Category</small><b>Citizen Services App</b></div>
+          <div><small>Tools</small><b>Figma</b></div>
+          <div><small>Status</small><b>Live</b></div>
+          <div class="wide"><small>Scope</small><b>Web &amp; mobile app UI design</b></div>
+        </div>
+      </div>
+      <div class="cover-devices">
+        <div class="phone p-back"><div class="scr"><img decoding="async" src="assets/images/case-study/projects/city-seva/splash.jpg" alt="Splash"></div></div>
+        <div class="phone p-front"><div class="scr"><img decoding="async" src="assets/images/case-study/projects/city-seva/home.jpg" alt="Home"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product mockup -->
+  <section data-no-lightbox class="product">
+    <div class="cs-grid">
+      <h2>Web portal, iOS and Android</h2>
+      <p class="body">The resident app and the admin web portal share one consistent visual style across web and mobile.</p>
+    </div>
+    <img loading="lazy" decoding="async" class="hero" src="assets/images/case-study/portfolios/hero-city-seva.jpg" alt="City Seva App desktop and mobile mockup">
+  </section>
+
+  <!-- Overview -->
+  <section data-no-lightbox class="overview">
+    <div class="cs-grid">
+      <div class="ov-text">
+        <h2>Overview</h2>
+        <p class="body">An academic institution wanted an app for the residents of its city. With it, people could easily find the information and services they need in daily life, such as education, health and transportation. The institution offered the app as a public service to local citizens.</p>
+        <p class="body">The client did not want a ready-made product. They wanted a simple, easy-to-use app with minimal navigation and a custom look and feel. I designed the user interface for the web portal and for the iOS and Android apps. I kept every screen clear, so residents could quickly find the service they need.</p>
+        <ul class="list">
+          <li>UI design for the web portal and mobile apps</li>
+          <li>Simple navigation and a clean custom interface</li>
+          <li>Service screens grouped around resident needs</li>
+          <li>Delivered in about 3 months</li>
+        </ul>
+      </div>
+      <figure class="ov-media">
+        <div class="crop" style="--sw:375; --x:8; --y:282; --w:360; --h:372"><img loading="lazy" decoding="async" src="assets/images/case-study/projects/city-seva/home.jpg" alt="Available services on the Home screen"></div>
+        <figcaption class="caption"><b>Home screen detail.</b>Healthcare, Transport, Household, Education, Emergency and Grievance in one grid.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Design approach -->
+  <section data-no-lightbox class="approach">
+    <div class="cs-grid">
+      <div class="ap-text">
+        <h2>Design approach</h2>
+        <p class="body">The app gives city residents one place to reach important services. I kept the interface basic and easy to use, so people can find what they need with as few taps as possible. Requirements were discussed over email, Zoom calls and face-to-face meetings. I shared the screens for review as the app took shape.</p>
+        <ul class="list">
+          <li>Clear, flat navigation for a wide public audience</li>
+          <li>Plain labels and simple screen layouts</li>
+          <li>Consistent visual style across web and mobile</li>
+          <li>Service information grouped the way residents think</li>
+        </ul>
+      </div>
+      <div class="ap-media">
+        <figure class="tall">
+          <div class="crop" style="--sw:375; --x:8; --y:118; --w:360; --h:400"><img loading="lazy" decoding="async" src="assets/images/case-study/projects/city-seva/select-specialisation.jpg" alt="Specialisation grid"></div>
+          <figcaption class="caption"><b>Select specialisation.</b>Plain labels with one icon each.</figcaption>
+        </figure>
+        <figure>
+          <div class="crop" style="--sw:375; --x:8; --y:122; --w:360; --h:112"><img loading="lazy" decoding="async" src="assets/images/case-study/projects/city-seva/home.jpg" alt="Upcoming booking card"></div>
+          <figcaption class="caption"><b>Upcoming booking.</b>Date and time at a glance.</figcaption>
+        </figure>
+        <figure>
+          <div class="crop" style="--sw:375; --x:8; --y:70; --w:360; --h:170"><img loading="lazy" decoding="async" src="assets/images/case-study/projects/city-seva/signup-details.jpg" alt="Language and phone number fields"></div>
+          <figcaption class="caption"><b>Sign-up.</b>Language choice first.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Selected screens -->
+  <section class="screens-intro">
+    <div class="cs-grid">
+      <h2>Selected screens</h2>
+      <p class="body">Screens from the resident mobile app and the admin portal, from sign-up and home to service booking and user management.</p>
+    </div>
+  </section>
+
+  <section class="lineup">
+    <div class="head"><span>Resident mobile app</span><span>5 screens</span></div>
+    <div class="row5">
+      <figure><div class="phone"><div class="scr"><img loading="lazy" decoding="async" src="assets/images/case-study/projects/city-seva/splash.jpg" alt="Splash"></div></div><figcaption><span>01</span>Splash</figcaption></figure>
+      <figure><div class="phone"><div class="scr"><img loading="lazy" decoding="async" src="assets/images/case-study/projects/city-seva/home.jpg" alt="Home"></div></div><figcaption><span>02</span>Home</figcaption></figure>
+      <figure><div class="phone"><div class="scr"><img loading="lazy" decoding="async" src="assets/images/case-study/projects/city-seva/signup-details.jpg" alt="Sign-up"></div></div><figcaption><span>03</span>Sign-up</figcaption></figure>
+      <figure><div class="phone"><div class="scr"><img loading="lazy" decoding="async" src="assets/images/case-study/projects/city-seva/select-specialisation.jpg" alt="Select specialisation"></div></div><figcaption><span>04</span>Select specialisation</figcaption></figure>
+      <figure><div class="phone"><div class="scr"><img loading="lazy" decoding="async" src="assets/images/case-study/projects/city-seva/details-page.jpg" alt="Details"></div></div><figcaption><span>05</span>Details</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="web">
+    <div class="head"><span>Admin web portal</span><span>3 screens</span></div>
+    <div class="web-grid">
+      <figure><div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="view"><img loading="lazy" decoding="async" src="assets/images/case-study/projects/city-seva/booking-details.jpg" alt="Booking details"></div></div><figcaption><span>06</span>Booking details</figcaption></figure>
+      <figure><div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="view"><img loading="lazy" decoding="async" src="assets/images/case-study/projects/city-seva/user-info.jpg" alt="User info"></div></div><figcaption><span>07</span>User info</figcaption></figure>
+      <figure><div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="view"><img loading="lazy" decoding="async" src="assets/images/case-study/projects/city-seva/users.jpg" alt="Service categories"></div></div><figcaption><span>08</span>Service categories</figcaption></figure>
+      <figure class="detail">
+        <div class="crop" style="--sw:1469; --x:516; --y:207; --w:438; --h:450"><img loading="lazy" decoding="async" src="assets/images/case-study/projects/city-seva/users.jpg" alt="Add category form"></div>
+        <figcaption class="caption"><b>Detail.</b>Add category form in the admin portal.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Challenges & solutions -->
+  <section data-no-lightbox class="cs">
+    <div class="cs-grid">
+      <h2>Challenges &amp; solutions</h2>
+      <div class="step">
+        <h3>Challenge</h3>
+        <p class="body">The app had to serve everyday residents of many ages, with different comfort levels using phones. The client asked for minimal navigation, so people needed to reach education, health and transport information without any confusion.</p>
+      </div>
+      <div class="step-arrow"><svg viewBox="0 0 120 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h114M104 2l12 10-12 10"/></svg></div>
+      <div class="step solution">
+        <h3>Solution</h3>
+        <p class="body">I kept the structure flat and the labels plain. I grouped the services the way residents actually think about them and reduced the taps needed to reach each service. This kept the app simple and easy to use for a wide public audience.</p>
+      </div>
+      <div class="cs-media">
+        <div class="phone"><div class="scr"><img loading="lazy" decoding="async" src="assets/images/case-study/projects/city-seva/details-page.jpg" alt="Details"></div></div>
+        <div class="crop" style="--sw:375; --x:8; --y:96; --w:360; --h:140"><img loading="lazy" decoding="async" src="assets/images/case-study/projects/city-seva/details-page.jpg" alt="Service provider header with call and WhatsApp numbers"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Delivery -->
+  <section class="delivery">
+    <div class="cs-grid">
+      <h2>Delivery</h2>
+      <div class="lead-col"><p class="body">The design was delivered in about 3 months. The client shared a completion certificate at the end.</p></div>
+    </div>
+    <div class="track">
+      <div class="stage"><div class="when">Start</div><h3>Requirements</h3><p>Requirements were discussed over email, Zoom calls and face-to-face meetings.</p></div>
+      <div class="stage"><div class="when">During design</div><h3>Screens for review</h3><p>I shared the screens for review as the app took shape, for the web portal and the iOS and Android apps.</p></div>
+      <div class="stage"><div class="when">Handover</div><h3>Completion certificate</h3><p>The design was delivered and the client shared a completion certificate.</p></div>
+      <div class="stage"><div class="when">Now</div><h3>Live</h3><p>The app is live for city residents on the web and on mobile.</p></div>
+    </div>
+    <div class="duration"><b>About 3 months</b><span>from requirements to completion</span></div>
+  </section>
+
+  <!-- Conclusion -->
+  <section data-no-lightbox class="conclusion">
+    <div class="cs-grid">
+      <h2>Conclusion</h2>
+      <p class="body con-a">The app is live for city residents on a web portal and on mobile apps for iOS and Android. Its simple, low-navigation interface makes it easy for a wide public audience to reach education, health and transport information.</p>
+      <p class="body con-b">The design was delivered in about 3 months, and the client shared a completion certificate. The clean, consistent screens give residents an easy way to use the services every day.</p>
+    </div>
+    <div class="closing">
+      <div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="view"><img loading="lazy" decoding="async" src="assets/images/case-study/projects/city-seva/user-info.jpg" alt="User info"></div></div>
+      <div class="phone"><div class="scr"><img loading="lazy" decoding="async" src="assets/images/case-study/projects/city-seva/home.jpg" alt="Home"></div></div>
+    </div>
+    <div class="credit"><div class="logo"><img loading="lazy" decoding="async" src="assets/images/case-study/projects/city-seva/splash.jpg" alt="City Seva logo"></div><span>Bishwajeet Gupta, Senior UI/UX Designer</span><span>Academic Institution · Figma</span></div>
+  </section>
+
+  <!-- Related work -->
+  <section class="related">
+    <h2>Related work</h2>
+    <div class="rel-grid">
+      <div class="rel">
+        <div class="im"><img loading="lazy" decoding="async" src="assets/images/case-study/portfolios/card-hotel-ops.jpg" alt="AI Hotel Operations CRM"></div>
+        <div class="rtags"><span>CRM</span><span>MOBILE APP</span></div>
+        <h3>AI Hotel Operations CRM</h3>
+      </div>
+      <div class="rel">
+        <div class="im"><img loading="lazy" decoding="async" src="assets/images/case-study/portfolios/card-marketing-agency.jpg" alt="Marketing Agency WordPress UI/UX"></div>
+        <div class="rtags"><span>WEBSITE</span><span>WORDPRESS</span></div>
+        <h3>Marketing Agency: WordPress UI/UX</h3>
+      </div>
+    </div>
+  </section>
+
+</div>
+        </main>
+        <!-- Case study end -->
+
+        <!-- Footer start: markup lives in assets/js/layout.js -->
+        <div data-include="footer"></div>
+        <!-- Footer end -->
+    </div>
+    <!-- Library JS -->
+    <script src="assets/js/lib/modernizr.js"></script>
+    <script src="assets/js/lib/jquery.js"></script>
+    <script src="assets/js/lib/jquery-migrate.js"></script>
+    <script src="assets/js/lib/bootstrap.js"></script>
+    <script src="assets/js/lib/animate.js"></script>
+
+    <!-- UI screens: open in the shared lightbox popup (app.js picks up .js-lightbox) -->
+    <script>
+    (function () {
+        var imgs = document.querySelectorAll('.cs-page img[src*="case-study/projects/"]');
+        Array.prototype.forEach.call(imgs, function (img) {
+            // skip logos cut from screenshots
+            if (img.closest('[class*="logo"]')) return;
+            // skip decorative images (no alt text)
+            if (!img.getAttribute('alt')) return;
+            // no popup on design system images
+            if (img.closest('[data-no-lightbox]') || /design-system/.test(img.getAttribute('src'))) return;
+            // largest wrapper that holds only this image and no text block (phone frame, browser frame, crop...)
+            var el = img;
+            for (var n = 0; n < 5; n++) {
+                var p = el.parentElement;
+                if (!p || p.classList.contains('cs-page') || p.tagName === 'SECTION') break;
+                if (p.querySelectorAll('img').length !== 1 || p.querySelector('h1, h2, h3, h4, p, ul, table')) break;
+                el = p;
+            }
+            if (el.classList.contains('js-lightbox')) return;
+            el.classList.add('js-lightbox');
+            el.setAttribute('data-full', img.getAttribute('src'));
+            el.setAttribute('data-title', img.getAttribute('alt') || '');
+            el.setAttribute('title', 'View full screen');
+        });
+    })();
+    </script>
+
+    <!-- App JS -->
+    <script src="assets/js/layout.js"></script>
+    <script src="assets/js/app.js"></script>
+
+    <!-- Related work: make each project card a link to its detail page -->
+    <script>
+    (function () {
+        var imgs = document.querySelectorAll('.cs-page img[src*="portfolios/card-"]');
+        Array.prototype.forEach.call(imgs, function (img) {
+            var m = img.getAttribute('src').match(/card-([a-z-]+)\.jpg/);
+            if (!m) return;
+            var card = img;
+            while (card.parentElement && !card.parentElement.querySelector('h3, h4, h5') ) { card = card.parentElement; }
+            card = card.parentElement || card;
+            if (card.querySelectorAll('img[src*="portfolios/card-"]').length > 1) return;
+            var a = document.createElement('a');
+            a.href = 'project-details-' + m[1] + '.html';
+            a.className = 'cs-rel-link';
+            // put the link inside the card so the card keeps its place in the grid
+            while (card.firstChild) { a.appendChild(card.firstChild); }
+            card.appendChild(a);
+        });
+    })();
+    </script>
+</body>
+
+</html>

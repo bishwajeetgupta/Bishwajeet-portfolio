@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Service Management Dashboard &amp; CRM UI | Bishwajeet Gupta</title>
+    <meta name="AdsBot-Google" content="noindex follow" />
+    <meta name="description" content="Case study: Service management internal dashboard and CRM UI, by Bishwajeet Gupta">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Service Management Dashboard &amp; CRM UI | Bishwajeet Gupta">
+    <meta property="og:description" content="Case study: Service management internal dashboard and CRM UI, by Bishwajeet Gupta">
+    <meta property="og:image" content="assets/images/case-study/portfolios/hero-service-dashboard.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/webp" href="assets/images/favicon.webp" />
+
+    <!-- Font CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Syne:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Library CSS -->
+    <link rel="stylesheet" href="assets/css/lib/bootstrap.css">
+    <link rel="stylesheet" href="assets/css/lib/animate.css">
+
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- Case study CSS (scoped to .cs-page) -->
+    <style>
+
+  /* Case study block. Element styles from Bootstrap and style.css are reverted inside .cs-page */
+  .cs-page { display: block; line-height: normal; font-size: 16px; font-weight: 400; letter-spacing: normal; text-align: left; color: #000; }
+  .cs-page :where(h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, dt, dd, table, thead, tbody, tr, th, td, figure, figcaption, blockquote, small, strong, b, em, i, span, label, section, header, footer, article, aside, nav, button) { all: revert; }
+  .cs-page .js-lightbox { cursor: zoom-in; }
+  .cs-page a.cs-rel-link { display: contents; color: inherit; text-decoration: none; cursor: pointer; }
+  .cs-page a.cs-rel-link:hover h3, .cs-page a.cs-rel-link:hover h4 { text-decoration: underline; text-underline-offset: 4px; }
+
+
+  
+  .cs-page {
+    --blue: #0B7BD7;
+    --btn: #0197E1;
+    --cyan: #40C8F3;
+    --side: #DEE0E4;
+    --app: #F2F3F9;
+    --ink: #111111;
+    --grey: #5f6470;
+    --line: #DEE0E4;
+    --pad: clamp(24px, 5.14vw, 72px);
+    --gap: 12px;
+  }
+  .cs-page, .cs-page * { box-sizing: border-box; margin: 0; padding: 0; }
+  .cs-page { background: var(--app); color: var(--ink); font-family: "Open Sans", Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+  .cs-page img { display: block; max-width: 100%; }
+  .cs-page .page { width: 100%; max-width: 1400px; margin: 0 auto; background: var(--app); display: flex; flex-direction: column; }
+  .cs-page .sec { padding: clamp(48px, 6.86vw, 96px) var(--pad); }
+  .cs-page .white { background: #fff; }
+  .cs-page .blue { background: var(--blue); color: #fff; }
+  .cs-page .g12 { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: clamp(16px, 1.71vw, 24px); }
+  .cs-page h2 { font-size: clamp(34px, 3.71vw, 52px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; }
+  .cs-page .txt p { font-size: clamp(16px, 1.21vw, 17px); line-height: 1.75; color: #3b404a; }
+  .cs-page .txt p + p { margin-top: 16px; }
+  .cs-page .blue .txt p { color: rgba(255,255,255,.88); }
+  .cs-page .list { list-style: none; margin-top: 26px; border-top: 1px solid var(--line); }
+  .cs-page .list li { padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 17px; font-weight: 600; display: flex; gap: 14px; align-items: baseline; }
+  .cs-page .list li::before { content: ""; width: 8px; height: 8px; background: var(--blue); flex-shrink: 0; transform: translateY(-2px); }
+  .cs-page .cap { font-size: 14px; font-weight: 600; color: var(--grey); margin-top: 14px; }
+  .cs-page .blue .cap { color: rgba(255,255,255,.85); }
+
+  
+  .cs-page .crop { position: relative; overflow: hidden; aspect-ratio: var(--w) / var(--h); background: #fff; }
+  .cs-page .crop img { position: absolute; max-width: none; width: calc(var(--iw) / var(--w) * 100%); left: calc(var(--x) / var(--w) * -100%); top: calc(var(--y) / var(--h) * -100%); }
+  .cs-page .logo { --iw: 2000; --x: 34; --y: 38; --w: 240; --h: 58; width: clamp(160px, 17.14vw, 240px); background: var(--side); }
+
+  
+  .cs-page .browser { border-radius: 10px; overflow: hidden; background: #fff; border: 1px solid #d3d6dd; box-shadow: 0 24px 60px rgba(17,17,17,.12); }
+  .cs-page .browser .bar { height: 34px; background: #fff; border-bottom: 1px solid #e6e8ec; display: flex; align-items: center; gap: 7px; padding: 0 14px; }
+  .cs-page .browser .bar i { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; }
+  .cs-page .browser .bar i:nth-child(1) { background: #ff5f57; } .cs-page .browser .bar i:nth-child(2) { background: #febc2e; } .cs-page .browser .bar i:nth-child(3) { background: #28c840; }
+  .cs-page .browser .bar span { margin-left: 14px; font-size: 12px; color: #7a808c; background: var(--app); padding: 4px 14px; border-radius: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+  .cs-page .view { overflow: hidden; }
+  .cs-page .view img { width: 100%; height: 100%; object-fit: cover; object-position: top left; }
+  .cs-page .phone { width: 100%; aspect-ratio: 9 / 19; border-radius: clamp(24px, 2.86vw, 40px); background: #111; padding: clamp(6px, .64vw, 9px); position: relative; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,.28); }
+  .cs-page .phone::before { content: ""; position: absolute; top: 2.4%; left: 50%; width: 28%; height: 2.8%; border-radius: 999px; background: #111; transform: translateX(-50%); z-index: 2; }
+  .cs-page .phone .scr { width: 100%; height: 100%; border-radius: clamp(18px, 2.29vw, 32px); overflow: hidden; background: #fff; }
+  .cs-page .phone .scr img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+
+  
+  .cs-page .topstrip { background: var(--side); padding: 18px var(--pad); display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .cs-page .topstrip span { font-size: 14px; color: #4a4f5a; font-weight: 600; }
+  .cs-page .cover { padding: clamp(48px, 5.71vw, 80px) var(--pad) 0; }
+  .cs-page .cover .kind { font-size: 15px; font-weight: 600; color: rgba(255,255,255,.85); }
+  .cs-page .cover h1 { grid-column: 1 / span 9; font-size: clamp(44px, 5.71vw, 80px); font-weight: 800; line-height: 1.04; letter-spacing: -0.03em; margin-top: 16px; }
+  .cs-page .info { display: grid; grid-template-columns: 1.1fr 1fr .8fr .7fr 1.2fr; gap: var(--gap); margin-top: clamp(36px, 4vw, 56px); }
+  .cs-page .info div { background: #fff; color: var(--ink); border-radius: 8px; padding: 18px 20px 20px; }
+  .cs-page .info small { display: block; font-size: 13px; color: var(--grey); margin-bottom: 10px; }
+  .cs-page .info b { font-size: clamp(17px, 1.43vw, 20px); font-weight: 700; line-height: 1.3; }
+  .cs-page .info .ok b { color: #058742; }
+  .cs-page .hero-wrap { margin-top: clamp(40px, 4.6vw, 64px); background: #fff; border-radius: 12px 12px 0 0; padding: clamp(20px, 3vw, 44px) clamp(12px, 2vw, 28px) 0; overflow: hidden; }
+  .cs-page .hero-wrap img { width: 100%; }
+  .cs-page .hero-stage { position: relative; padding: 0 22% 6% 0; }
+  .cs-page .hero-stage .browser { box-shadow: 0 18px 44px rgba(17,17,17,.14); }
+  .cs-page .hero-stage .phone { position: absolute; right: 2%; bottom: -4%; width: 19%; box-shadow: 0 24px 50px rgba(0,0,0,.3); }
+
+  
+  .cs-page .ov .txt { grid-column: 1 / span 6; }
+  .cs-page .ov .order { grid-column: 8 / span 5; }
+  .cs-page .ov h2 { margin-bottom: 26px; }
+  .cs-page .order h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+  .cs-page .order > p { font-size: 15px; color: var(--grey); line-height: 1.6; }
+  .cs-page .order ol { list-style: none; margin-top: 20px; border-top: 2px solid var(--ink); }
+  .cs-page .order li { display: grid; grid-template-columns: 44px 1fr; gap: 10px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .cs-page .order li b { font-size: 15px; color: var(--blue); }
+  .cs-page .order li strong { display: block; font-size: 17px; }
+  .cs-page .order li span { font-size: 15px; color: var(--grey); line-height: 1.55; }
+  .cs-page .ov-shot { grid-column: 1 / -1; margin-top: clamp(40px, 4.6vw, 64px); }
+  .cs-page .hero-kpi { --iw: 2000; --x: 80; --y: 130; --w: 1840; --h: 1120; border-radius: 10px; border: 1px solid var(--line); }
+
+  
+  .cs-page .ds-head h2 { grid-column: 1 / span 5; }
+  .cs-page .ds-head .txt { grid-column: 7 / span 6; }
+  .cs-page .ds-board { margin-top: clamp(36px, 4vw, 56px); }
+  .cs-page .details { display: grid; grid-template-columns: repeat(12, 1fr); gap: clamp(16px, 1.71vw, 24px); margin-top: clamp(16px, 1.71vw, 24px); }
+  .cs-page .detail { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 18px; display: flex; flex-direction: column; }
+  .cs-page .detail .crop { border-radius: 6px; margin: auto 0; width: 100%; }
+  .cs-page .detail h4 { font-size: 15px; font-weight: 700; margin-top: 14px; }
+  .cs-page .detail.d7 { grid-column: span 7; } .cs-page .detail.d5 { grid-column: span 5; }
+  .cs-page .c-table { --iw: 2000; --x: 30; --y: 160; --w: 1940; --h: 680; }
+  .cs-page .c-tags { --iw: 1536; --x: 1040; --y: 458; --w: 296; --h: 140; }
+  .cs-page .c-kpi { --iw: 1536; --x: 1036; --y: 108; --w: 470; --h: 88; }
+  .cs-page .c-type { --iw: 1536; --x: 36; --y: 512; --w: 380; --h: 145; }
+
+  
+  .cs-page .ui { --p: #0078D4; --ok: #0E8F3E; --err: #CB102E; --info: #0D6EFD; --warn: #F5B300; --t1: #111111; --t2: #666666; --bd: #E6E8EE;
+        font-family: "Inter", "Open Sans", Arial, sans-serif; color: var(--t1); margin: auto 0; width: 100%; }
+  .cs-page .ui-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .cs-page .ui-kpi { border: 1px solid var(--bd); border-radius: 10px; padding: 14px 14px 12px; background: #fff; }
+  .cs-page .ui-kpi .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 6px; }
+  .cs-page .ui-kpi .lbl { font-size: 11px; font-weight: 500; color: #333; line-height: 1.3; }
+  .cs-page .ui-kpi .ic { width: 26px; height: 26px; border-radius: 7px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .cs-page .ui-kpi .ic svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .cs-page .ui-kpi .val { font-size: 22px; font-weight: 700; margin-top: 8px; letter-spacing: -0.01em; }
+  .cs-page .ui-kpi .chg { font-size: 10.5px; color: var(--t2); margin-top: 4px; white-space: nowrap; }
+  .cs-page .ui-kpi .chg b { color: var(--ok); font-weight: 600; }
+  .cs-page .ui-type { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px 14px; }
+  .cs-page .ui-type .s { font-weight: 700; line-height: 1.15; white-space: nowrap; }
+  .cs-page .ui-type .m { font-size: 12px; color: var(--t2); margin-top: 6px; line-height: 1.45; }
+  .cs-page .ui-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .cs-page .ui-table th { text-align: left; font-weight: 500; font-size: 11px; color: var(--t2); padding: 0 8px 10px; border-bottom: 1px solid var(--bd); }
+  .cs-page .ui-table td { padding: 10px 8px; border-bottom: 1px solid var(--bd); white-space: nowrap; }
+  .cs-page .ui-table tr:last-child td { border-bottom: 0; }
+  .cs-page .tag { display: inline-block; font-size: 10.5px; font-weight: 600; padding: 3px 8px; border-radius: 999px; border: 1px solid; }
+  .cs-page .tag.ok { color: var(--ok); background: #E8F5EE; border-color: #BFE3CD; }
+  .cs-page .tag.pr { color: var(--info); background: #EAF1FF; border-color: #C3D6FD; }
+  .cs-page .tag.err { color: var(--err); background: #FDECEF; border-color: #F5C2CB; }
+  .cs-page .ui-panel { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 18px; display: grid; grid-template-columns: 1.7fr 1fr; gap: 18px; }
+  .cs-page .ui-panel h5 { font-size: 13px; font-weight: 600; margin-bottom: 12px; }
+  .cs-page .ui-panel .all { display: block; text-align: right; font-size: 11px; font-weight: 600; color: var(--p); margin-top: 8px; }
+  .cs-page .ui-qa { display: flex; flex-direction: column; gap: 8px; }
+  .cs-page .ui-qa div { display: flex; align-items: center; gap: 10px; border: 1px solid var(--bd); border-radius: 8px; padding: 10px 12px; font-size: 12px; font-weight: 500; }
+  .cs-page .ui-qa svg { width: 15px; height: 15px; fill: none; stroke: var(--p); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+  .cs-page .ui-qa div::after { content: "+"; margin-left: auto; color: var(--p); font-size: 15px; font-weight: 600; }
+
+  
+  .cs-page .sc-head h2 { grid-column: 1 / span 5; }
+  .cs-page .sc-head .txt { grid-column: 7 / span 6; align-self: end; }
+  .cs-page .big { margin-top: clamp(36px, 4vw, 56px); }
+  .cs-page .big .view { aspect-ratio: 2000 / 1454; }
+  .cs-page .web3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 1.71vw, 24px); margin-top: clamp(32px, 3.4vw, 48px); }
+  .cs-page .web3 .view { aspect-ratio: 16 / 11; }
+  .cs-page .mob { padding: clamp(48px, 6.86vw, 96px) var(--pad); }
+  .cs-page .mob h3 { font-size: clamp(26px, 2.57vw, 36px); font-weight: 700; letter-spacing: -0.01em; }
+  .cs-page .mob .txt { margin-top: 12px; }
+  .cs-page .phones { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 4vw, 56px); margin-top: clamp(36px, 4vw, 56px); padding: 0 clamp(0px, 4vw, 56px); }
+  .cs-page .phones .cap { text-align: center; }
+  .cs-page .phones { row-gap: clamp(32px, 4vw, 56px); }
+
+  
+  .cs-page .cs-grid { margin-top: clamp(32px, 3.4vw, 48px); display: grid; grid-template-columns: 1fr 1fr; border-top: 2px solid var(--ink); }
+  .cs-page .cs-grid > div { padding: 28px 0 0; }
+  .cs-page .cs-grid > div + div { padding-left: clamp(24px, 3.4vw, 48px); border-left: 1px solid var(--line); }
+  .cs-page .cs-grid > div:first-child { padding-right: clamp(24px, 3.4vw, 48px); }
+  .cs-page .cs-grid h3 { font-size: 22px; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 12px; }
+  .cs-page .cs-grid h3 i { width: 12px; height: 12px; background: #971E20; flex-shrink: 0; }
+  .cs-page .cs-grid .sol h3 i { background: #058742; }
+  .cs-page .c-alerts { --iw: 1536; --x: 1036; --y: 428; --w: 470; --h: 196; border-radius: 10px; border: 1px solid var(--line); }
+  .cs-page .c-sub { --iw: 2000; --x: 400; --y: 80; --w: 1540; --h: 820; border-radius: 10px; border: 1px solid var(--line); }
+  .cs-page .cs-shots { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 1.71vw, 24px); margin-top: clamp(36px, 4vw, 56px); align-items: start; }
+
+  
+  .cs-page .con-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 3.4vw, 48px); margin-top: clamp(28px, 3vw, 40px); }
+  .cs-page .con-grid p { font-size: clamp(17px, 1.43vw, 20px); line-height: 1.65; color: #fff; }
+
+  
+  .cs-page .rel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 2vw, 28px); margin-top: clamp(32px, 3.4vw, 48px); }
+  .cs-page .rel .img { aspect-ratio: 3 / 2; border-radius: 10px; overflow: hidden; }
+  .cs-page .rel .img img { width: 100%; height: 100%; object-fit: cover; }
+  .cs-page .rel .tags { font-size: 13px; font-weight: 700; letter-spacing: .06em; color: var(--blue); margin: 18px 0 6px; }
+  .cs-page .rel h4 { font-size: clamp(20px, 1.71vw, 24px); font-weight: 700; }
+
+  
+  .cs-page .end { background: var(--side); padding: 28px var(--pad); display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .cs-page .end span { font-size: 15px; font-weight: 600; color: #3b404a; }
+
+  
+  @media (max-width: 1200px) {
+    .cs-page .info { grid-template-columns: repeat(3, 1fr); }
+    .cs-page .info div:nth-child(5) { grid-column: span 2; }
+    .cs-page .ov .txt { grid-column: 1 / span 7; }
+    .cs-page .ov .order { grid-column: 8 / span 5; }
+  }
+  @media (max-width: 1024px) {
+    .cs-page .cover h1 { grid-column: 1 / -1; }
+    .cs-page .ov .txt, .cs-page .ov .order, .cs-page .ds-head h2, .cs-page .ds-head .txt, .cs-page .sc-head h2, .cs-page .sc-head .txt { grid-column: 1 / -1; }
+    .cs-page .ov .order, .cs-page .ds-head .txt, .cs-page .sc-head .txt { margin-top: 24px; }
+    .cs-page .detail.d7, .cs-page .detail.d5 { grid-column: span 12; }
+    .cs-page .web3 { grid-template-columns: 1fr 1fr; }
+    .cs-page .web3 > div:last-child { grid-column: span 2; }
+    .cs-page .web3 > div:last-child .view { aspect-ratio: 16 / 9; }
+    .cs-page .phones { padding: 0; }
+  }
+  @media (max-width: 768px) {
+    .cs-page .ui-kpis { grid-template-columns: 1fr 1fr; }
+    .cs-page .ui-panel { grid-template-columns: 1fr; }
+    .cs-page .ui-table td { white-space: normal; }
+    .cs-page .ui-type { grid-template-columns: 1fr 1fr; }
+    .cs-page .info { grid-template-columns: 1fr 1fr; }
+    .cs-page .info div:nth-child(5) { grid-column: span 2; }
+    .cs-page .cs-grid, .cs-page .cs-shots, .cs-page .con-grid, .cs-page .rel-grid { grid-template-columns: 1fr; }
+    .cs-page .cs-grid > div:first-child { padding-right: 0; padding-bottom: 28px; }
+    .cs-page .cs-grid > div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); }
+    .cs-page .web3 { grid-template-columns: 1fr; }
+    .cs-page .web3 > div:last-child { grid-column: auto; }
+    .cs-page .web3 > div:last-child .view { aspect-ratio: 16 / 11; }
+    .cs-page .browser .bar span { display: none; }
+    .cs-page .phones { gap: 14px; }
+  }
+  @media (max-width: 480px) {
+    .cs-page .info { grid-template-columns: 1fr; }
+    .cs-page .info div:nth-child(5) { grid-column: auto; }
+    .cs-page .phones { grid-template-columns: 1fr 1fr; }
+    .cs-page .topstrip span { font-size: 12px; }
+    .cs-page .list li { font-size: 16px; }
+  }
+
+  
+  @media (min-width: 768px) {
+    .cs-page .rel-grid { grid-template-columns: 1fr 1fr; }
+    .cs-page .g12 > .rel { grid-column: span 6; }
+    .cs-page .g12 > .rel + .rel { margin-top: 0; }
+  }
+  @media (max-width: 767.98px) {
+    .cs-page .rel-grid { grid-template-columns: 1fr; }
+  }
+
+    </style>
+</head>
+
+<body>
+    <div class="overflow-x-hidden">
+        <!-- Header start: markup lives in assets/js/layout.js -->
+        <div data-include="header" data-header-style="detail"></div>
+        <!-- Header end -->
+
+        <!-- Case study start -->
+        <main class="cs-page">
+<div class="page">
+
+  <!-- Cover -->
+  <div class="topstrip">
+    <div class="crop logo"><img decoding="async" src="assets/images/case-study/projects/service-dashboard/sd-dashboard.jpg" alt="ServiceDash"></div>
+    <span>Case study by Bishwajeet Gupta, Senior UI/UX Designer</span>
+  </div>
+  <section class="blue cover">
+    <div class="kind">Internal Dashboard UI &nbsp;/&nbsp; Design System</div>
+    <div class="g12"><h1>Service Management Dashboard &amp; CRM UI</h1></div>
+    <div class="info">
+      <div><small>Client</small><b>HVAC Company (Confidential)</b></div>
+      <div><small>Category</small><b>Internal Dashboard UI</b></div>
+      <div><small>Tools</small><b>Figma, HTML</b></div>
+      <div class="ok"><small>Status</small><b>Shipped</b></div>
+      <div><small>Scope</small><b>Service &amp; maintenance tracking</b></div>
+    </div>
+    <div class="hero-wrap"><div class="hero-stage">
+      <div class="browser"><div class="bar"><i></i><i></i><i></i><span>service-dashboard.app/main-dashboard</span></div><img decoding="async" src="assets/images/case-study/projects/service-dashboard/sd-dashboard.jpg" alt="Service Management Dashboard main screen"></div>
+      <div class="phone"><div class="scr"><img decoding="async" src="assets/images/case-study/projects/service-dashboard/sd-mobile-home.jpg" alt="Service Management mobile home screen"></div></div>
+    </div></div>
+  </section>
+
+  <!-- Overview -->
+  <section class="sec white">
+    <div class="g12 ov">
+      <div class="txt">
+        <h2>Overview</h2>
+        <p>This is an internal management system for tracking service units, requests and maintenance history. The dashboard had to present dense operational data clearly, so that staff could scan it and act on it quickly.</p>
+        <p>In a data-heavy internal tool like this, the design work was less about visual decoration. It was more about information hierarchy: making sure that the most actionable data, such as open requests and SLA status, appeared first.</p>
+        <ul class="list">
+          <li>Data-dense dashboard UI</li>
+          <li>Service &amp; maintenance tracking</li>
+          <li>Open requests &amp; SLA status first</li>
+          <li>Consistent status tags for fast scanning</li>
+        </ul>
+      </div>
+      <div class="order">
+        <h3>Information hierarchy</h3>
+        <p>The order in which data appears on the screen.</p>
+        <ol>
+          <li><b>1</b><div><strong>Open requests</strong><span>The most actionable data, placed at the top.</span></div></li>
+          <li><b>2</b><div><strong>SLA status</strong><span>Shown together with the open requests.</span></div></li>
+          <li><b>3</b><div><strong>Status tags</strong><span>Scheduled, Review and OK, in one consistent style for fast scanning.</span></div></li>
+          <li><b>4</b><div><strong>Service &amp; maintenance records</strong><span>Service units, requests and maintenance history.</span></div></li>
+        </ol>
+      </div>
+      <div class="ov-shot">
+        <div class="crop hero-kpi"><img decoding="async" src="assets/images/case-study/projects/service-dashboard/sd-dashboard-overview.jpg" alt="Dashboard overview with charts and KPI cards"></div>
+        <div class="cap">Close-up of the web dashboard: charts and KPI cards on one screen.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Design system -->
+  <section data-no-lightbox class="sec">
+    <div class="g12 ds-head">
+      <h2>Design system</h2>
+      <div class="txt">
+        <p>I set up a compact type scale and consistent tag styling for statuses such as Scheduled, Review and OK. This lets staff scan dozens of rows at a glance without the interface feeling cluttered. The same components carry across the web dashboard and the mobile views.</p>
+        <ul class="list">
+          <li>Data table, status tag and KPI card components</li>
+          <li>Compact type scale for dense data</li>
+          <li>Consistent styling across web and mobile</li>
+        </ul>
+      </div>
+    </div>
+    <div class="browser ds-board">
+      <div class="bar"><i></i><i></i><i></i><span>service-dashboard.app/design-system</span></div>
+      <div class="view" style="aspect-ratio:1536/1024"><img loading="lazy" decoding="async" src="assets/images/case-study/projects/service-dashboard/design-system.jpg" alt="Service management design system"></div>
+    </div>
+    <div class="details">
+      <div class="detail d7"><div class="crop c-table"><img loading="lazy" decoding="async" src="assets/images/case-study/projects/service-dashboard/sd-data-table.jpg" alt="Data table rows"></div><h4>Data table</h4></div>
+      <div class="detail d5"><div class="ui">
+        <table class="ui-table">
+          <tr><th>Event</th><th>Status</th></tr>
+          <tr><td>High Power Consumption</td><td><span class="tag ok">Completed</span></td></tr>
+          <tr><td>Outdoor Unit Error</td><td><span class="tag pr">In Progress</span></td></tr>
+          <tr><td>Compressor Fault</td><td><span class="tag err">Failed</span></td></tr>
+          <tr><td>Sensor Disconnected</td><td><span class="tag ok">Completed</span></td></tr>
+        </table>
+      </div><h4>Status tags</h4></div>
+      <div class="detail d5"><div class="ui ui-type">
+        <div><div class="s" style="font-size:22px">Heading 1</div><div class="m">Inter Bold<br>32px / 40px</div></div>
+        <div><div class="s" style="font-size:19px">Heading 2</div><div class="m">Inter Bold<br>24px / 32px</div></div>
+        <div><div class="s" style="font-size:16px">Heading 3</div><div class="m">Inter Bold<br>18px / 24px</div></div>
+        <div><div class="s" style="font-size:14px;font-weight:500">Heading 4</div><div class="m">Inter Medium<br>16px / 24px</div></div>
+        <div><div class="s" style="font-size:14px;font-weight:400">Body 1</div><div class="m">Inter Regular<br>14px / 22px</div></div>
+        <div><div class="s" style="font-size:13px;font-weight:400">Body 2</div><div class="m">Inter Regular<br>13px / 20px</div></div>
+        <div><div class="s" style="font-size:12px;font-weight:400">Caption</div><div class="m">Inter Regular<br>12px / 18px</div></div>
+      </div><h4>Compact type scale</h4></div>
+      <div class="detail d7"><div class="ui ui-kpis">
+        <div class="ui-kpi"><div class="top"><span class="lbl">Total Units</span><span class="ic" style="background:#EAF3FC;color:#0078D4"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 7h.01M15 7h.01M9 11h.01M15 11h.01M9 15h.01M15 15h.01M10 21v-3h4v3"/></svg></span></div><div class="val">1,245</div><div class="chg"><b>+12.5%</b> vs last month</div></div>
+        <div class="ui-kpi"><div class="top"><span class="lbl">Energy Consumption (kWh)</span><span class="ic" style="background:#EAF3FC;color:#0078D4"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span></div><div class="val">2,580</div><div class="chg"><b>+15.3%</b> vs last month</div></div>
+        <div class="ui-kpi"><div class="top"><span class="lbl">Active Alarms</span><span class="ic" style="background:#FDECEF;color:#CB102E"><svg viewBox="0 0 24 24"><path d="M6 18v-6a6 6 0 0 1 12 0v6M4 18h16M12 3v1M4.5 6.5l.7.7M19.5 6.5l-.7.7"/></svg></span></div><div class="val">38</div><div class="chg"><b>+5.2%</b> vs last month</div></div>
+        <div class="ui-kpi"><div class="top"><span class="lbl">Efficiency</span><span class="ic" style="background:#E8F5EE;color:#0E8F3E"><svg viewBox="0 0 24 24"><path d="m3 17 6-6 4 4 8-8M15 7h6v6"/></svg></span></div><div class="val">98.6%</div><div class="chg"><b>+3.4%</b> vs last month</div></div>
+      </div><h4>KPI cards</h4></div>
+    </div>
+  </section>
+
+  <!-- Selected screens -->
+  <section class="sec white">
+    <div class="g12 sc-head">
+      <h2>Selected screens</h2>
+      <div class="txt"><p>Screens from the dashboard and the mobile views. They cover reports, service tracking and unit records.</p></div>
+    </div>
+    <div class="big">
+      <div class="browser">
+        <div class="bar"><i></i><i></i><i></i><span>service-dashboard.app/main-dashboard</span></div>
+        <div class="view"><img loading="lazy" decoding="async" src="assets/images/case-study/projects/service-dashboard/sd-dashboard-help.jpg" alt="Main dashboard with help and notification panels"></div>
+      </div>
+      <div class="cap">Main dashboard with energy, efficiency and system health</div>
+    </div>
+    <div class="web3">
+      <div><div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="view"><img loading="lazy" decoding="async" src="assets/images/case-study/projects/service-dashboard/sd-report-subscription.jpg" alt="Report subscription"></div></div><div class="cap">Report subscription</div></div>
+      <div><div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="view"><img loading="lazy" decoding="async" src="assets/images/case-study/projects/service-dashboard/sd-add-user.jpg" alt="Add user form"></div></div><div class="cap">Add user and permissions</div></div>
+      <div><div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="view"><img loading="lazy" decoding="async" src="assets/images/case-study/projects/service-dashboard/sd-add-author.jpg" alt="Add author form"></div></div><div class="cap">Add author form</div></div>
+    </div>
+  </section>
+
+  <section class="blue mob">
+    <h3>Mobile views</h3>
+    <div class="txt"><p>The mobile views use the same components as the web dashboard.</p></div>
+    <div class="phones">
+      <div><div class="phone"><div class="scr"><img loading="lazy" decoding="async" src="assets/images/case-study/projects/service-dashboard/sd-mobile-home.jpg" alt="Mobile home"></div></div><div class="cap">Home with saving and efficiency cards</div></div>
+      <div><div class="phone"><div class="scr"><img loading="lazy" decoding="async" src="assets/images/case-study/projects/service-dashboard/sd-mobile-building.jpg" alt="Building details with AI summary"></div></div><div class="cap">Building details with AI summary</div></div>
+      <div><div class="phone"><div class="scr"><img loading="lazy" decoding="async" src="assets/images/case-study/projects/service-dashboard/sd-mobile-relation.jpg" alt="Outdoor and indoor relation map"></div></div><div class="cap">Outdoor and indoor relation map</div></div>
+      <div><div class="phone"><div class="scr"><img loading="lazy" decoding="async" src="assets/images/case-study/projects/service-dashboard/sd-mobile-power-bar.jpg" alt="Power consumption bar chart"></div></div><div class="cap">Power consumption by month</div></div>
+      <div><div class="phone"><div class="scr"><img loading="lazy" decoding="async" src="assets/images/case-study/projects/service-dashboard/sd-mobile-iot.jpg" alt="IoT status by zone"></div></div><div class="cap">IoT status by zone</div></div>
+      <div><div class="phone"><div class="scr"><img loading="lazy" decoding="async" src="assets/images/case-study/projects/service-dashboard/sd-mobile-menu.jpg" alt="Side menu"></div></div><div class="cap">Side menu</div></div>
+    </div>
+  </section>
+
+  <!-- Challenges & solutions -->
+  <section class="sec white">
+    <h2>Challenges &amp; solutions</h2>
+    <div class="cs-grid txt">
+      <div>
+        <h3><i></i>Challenge</h3>
+        <p>The dashboard had to show dense operational data, and staff needed to scan open requests and SLA status quickly. Too much detail at once would slow them down. It would also hide the items that needed action first.</p>
+      </div>
+      <div class="sol">
+        <h3><i></i>Solution</h3>
+        <p>I set a clear information hierarchy that pushed the most actionable data to the top. I used calm and consistent status colours and kept the layout easy to scan. Staff could then read the state of the system and act in seconds.</p>
+      </div>
+    </div>
+    <div class="cs-shots">
+      <div><div class="ui ui-panel">
+        <div>
+          <h5>Recent Alerts</h5>
+          <table class="ui-table">
+            <tr><th>Time</th><th>Building</th><th>Event</th><th>Status</th></tr>
+            <tr><td>10:00 AM</td><td>Building A</td><td>High Power Consumption</td><td><span class="tag ok">Completed</span></td></tr>
+            <tr><td>09:46 AM</td><td>Building B</td><td>Outdoor Unit Error</td><td><span class="tag pr">In Progress</span></td></tr>
+            <tr><td>09:30 AM</td><td>Building C</td><td>Compressor Fault</td><td><span class="tag err">Failed</span></td></tr>
+            <tr><td>09:15 AM</td><td>Building D</td><td>Sensor Disconnected</td><td><span class="tag ok">Completed</span></td></tr>
+          </table>
+          <span class="all">View All</span>
+        </div>
+        <div>
+          <h5>Quick Actions</h5>
+          <div class="ui-qa">
+            <div><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 7h.01M15 7h.01M9 11h.01M15 11h.01"/></svg>Add New Building</div>
+            <div><svg viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M12 12v6M9 15h6"/></svg>Create Report</div>
+            <div><svg viewBox="0 0 24 24"><path d="m3 17 6-6 4 4 8-8"/></svg>Energy Overview</div>
+            <div><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><path d="M2 21a7 7 0 0 1 14 0M19 8v6M16 11h6"/></svg>Add New User</div>
+          </div>
+        </div>
+      </div><div class="cap">Recent alerts with status tags, next to quick actions.</div></div>
+      <div><div class="crop c-sub"><img loading="lazy" decoding="async" src="assets/images/case-study/projects/service-dashboard/sd-report-subscription.jpg" alt="Report settings grouped by section"></div><div class="cap">Report settings grouped into clear sections.</div></div>
+    </div>
+  </section>
+
+  <!-- Conclusion -->
+  <section class="sec blue">
+    <h2>Conclusion</h2>
+    <div class="con-grid">
+      <p>I built the dashboard directly in HTML. This kept the handoff simple for a smaller internal tool. It still followed the same component discipline that I use on larger projects.</p>
+      <p>The result is a dashboard that shows what needs attention first. For an internal ops tool, this matters more than any amount of visual polish.</p>
+    </div>
+  </section>
+
+  <!-- Related work -->
+  <section class="sec white">
+    <h2>Related work</h2>
+    <div class="rel-grid">
+      <div class="rel">
+        <div class="img"><img loading="lazy" decoding="async" src="assets/images/case-study/portfolios/card-city-seva.jpg" alt="City Seva App"></div>
+        <div class="tags">MOBILE APP &nbsp;/&nbsp; CITIZEN SERVICES</div>
+        <h4>City Seva App: Citizen Services App</h4>
+      </div>
+      <div class="rel">
+        <div class="img"><img loading="lazy" decoding="async" src="assets/images/case-study/portfolios/card-marketing-agency.jpg" alt="Marketing Agency Website"></div>
+        <div class="tags">WEBSITE &nbsp;/&nbsp; WORDPRESS</div>
+        <h4>Marketing Agency: WordPress UI/UX</h4>
+      </div>
+    </div>
+  </section>
+
+  <div class="end">
+    <div class="crop logo"><img loading="lazy" decoding="async" src="assets/images/case-study/projects/service-dashboard/sd-dashboard.jpg" alt="ServiceDash"></div>
+    <span>Bishwajeet Gupta, Senior UI/UX Designer</span>
+  </div>
+
+</div>
+        </main>
+        <!-- Case study end -->
+
+        <!-- Footer start: markup lives in assets/js/layout.js -->
+        <div data-include="footer"></div>
+        <!-- Footer end -->
+    </div>
+    <!-- Library JS -->
+    <script src="assets/js/lib/modernizr.js"></script>
+    <script src="assets/js/lib/jquery.js"></script>
+    <script src="assets/js/lib/jquery-migrate.js"></script>
+    <script src="assets/js/lib/bootstrap.js"></script>
+    <script src="assets/js/lib/animate.js"></script>
+
+    <!-- UI screens: open in the shared lightbox popup (app.js picks up .js-lightbox) -->
+    <script>
+    (function () {
+        var imgs = document.querySelectorAll('.cs-page img[src*="case-study/projects/"]');
+        Array.prototype.forEach.call(imgs, function (img) {
+            // skip logos cut from screenshots
+            if (img.closest('[class*="logo"]')) return;
+            // skip decorative images (no alt text)
+            if (!img.getAttribute('alt')) return;
+            // no popup on design system images
+            if (img.closest('[data-no-lightbox]') || /design-system/.test(img.getAttribute('src'))) return;
+            // largest wrapper that holds only this image and no text block (phone frame, browser frame, crop...)
+            var el = img;
+            for (var n = 0; n < 5; n++) {
+                var p = el.parentElement;
+                if (!p || p.classList.contains('cs-page') || p.tagName === 'SECTION') break;
+                if (p.querySelectorAll('img').length !== 1 || p.querySelector('h1, h2, h3, h4, p, ul, table')) break;
+                el = p;
+            }
+            if (el.classList.contains('js-lightbox')) return;
+            el.classList.add('js-lightbox');
+            el.setAttribute('data-full', img.getAttribute('src'));
+            el.setAttribute('data-title', img.getAttribute('alt') || '');
+            el.setAttribute('title', 'View full screen');
+        });
+    })();
+    </script>
+
+    <!-- App JS -->
+    <script src="assets/js/layout.js"></script>
+    <script src="assets/js/app.js"></script>
+
+    <!-- Related work: make each project card a link to its detail page -->
+    <script>
+    (function () {
+        var imgs = document.querySelectorAll('.cs-page img[src*="portfolios/card-"]');
+        Array.prototype.forEach.call(imgs, function (img) {
+            var m = img.getAttribute('src').match(/card-([a-z-]+)\.jpg/);
+            if (!m) return;
+            var card = img;
+            while (card.parentElement && !card.parentElement.querySelector('h3, h4, h5') ) { card = card.parentElement; }
+            card = card.parentElement || card;
+            if (card.querySelectorAll('img[src*="portfolios/card-"]').length > 1) return;
+            var a = document.createElement('a');
+            a.href = 'project-details-' + m[1] + '.html';
+            a.className = 'cs-rel-link';
+            // put the link inside the card so the card keeps its place in the grid
+            while (card.firstChild) { a.appendChild(card.firstChild); }
+            card.appendChild(a);
+        });
+    })();
+    </script>
+</body>
+
+</html>
