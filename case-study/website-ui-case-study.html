@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Website UI Design: 6 Websites | Bishwajeet Gupta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Lexend:wght@500;600;700&family=Poppins:wght@500;600;700&family=Hanken+Grotesk:wght@500;600;700&family=Inter:wght@600;700;800&family=Archivo:wght@600;700;800&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0b0b0b;
+    --ink: #111111;
+    --grey: #6b6b6b;
+    --rule: #e4e4e4;
+    --pad: clamp(20px, 4.57vw, 64px);
+    --g: clamp(14px, 1.71vw, 24px);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #fff; font-family: "Manrope", "Helvetica Neue", Arial, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+  .page { width: 100%; max-width: 1400px; margin: 0 auto; background: #fff; }
+  img { display: block; max-width: 100%; }
+  .wrap { padding-left: var(--pad); padding-right: var(--pad); }
+
+  h2.title { font-size: clamp(36px, 4.57vw, 64px); font-weight: 800; letter-spacing: -0.035em; line-height: 1; }
+  .lead { font-size: clamp(16px, 1.29vw, 18px); line-height: 1.7; color: #333; }
+  .lead + .lead { margin-top: 16px; }
+
+  /* real-screen crop: --iw image width, --x/--y/--cw/--ch crop box in image px */
+  .zoom { position: relative; overflow: hidden; aspect-ratio: var(--cw) / var(--ch); background: #fff; }
+  .zoom img { position: absolute; left: 0; top: 0; max-width: none; width: calc(var(--iw) / var(--cw) * 100%); margin-left: calc(var(--x) / var(--cw) * -100%); margin-top: calc(var(--y) / var(--cw) * -100%); }
+
+  .browser { background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 18px 40px rgba(0,0,0,.22); display: flex; flex-direction: column; }
+  .bar { height: 30px; background: #ebebeb; display: flex; align-items: center; gap: 7px; padding: 0 14px; flex-shrink: 0; }
+  .bar i { width: 10px; height: 10px; border-radius: 50%; background: #c9c9c9; }
+  .bar i:nth-child(1) { background: #ff5f57; } .bar i:nth-child(2) { background: #febc2e; } .bar i:nth-child(3) { background: #28c840; }
+  .crop { position: relative; overflow: hidden; background: #fff; }
+  .crop img { position: absolute; top: 0; left: 0; width: 100%; max-width: none; margin-top: calc(-1 * var(--y, 0%)); }
+
+  /* ---------- Cover ---------- */
+  .cover-top { display: flex; justify-content: space-between; gap: 16px; padding-top: 28px; padding-bottom: 22px; border-bottom: 1px solid var(--rule); font-size: 14px; font-weight: 600; }
+  .cover-top span:last-child { color: var(--grey); font-weight: 500; }
+  .cover-head { display: grid; grid-template-columns: 1.35fr 1fr; gap: 48px; align-items: end; padding-top: clamp(48px, 5.71vw, 80px); padding-bottom: clamp(40px, 4.57vw, 64px); }
+  .cover-head .kicker { font-size: 15px; font-weight: 600; color: var(--grey); margin-bottom: 18px; }
+  .cover-head h1 { font-size: clamp(54px, 8.29vw, 116px); font-weight: 800; letter-spacing: -0.05em; line-height: .92; }
+  .info { display: grid; grid-template-columns: 1fr 1fr; border-top: 2px solid var(--ink); }
+  .info div { padding: 16px 0; border-bottom: 1px solid var(--rule); }
+  .info div:nth-child(odd) { padding-right: 16px; }
+  .info .full { grid-column: span 2; }
+  .info small { display: block; font-size: 13px; color: var(--grey); margin-bottom: 4px; font-weight: 500; }
+  .info b { font-size: 17px; font-weight: 700; }
+  .cover-wall { background: var(--black); padding: clamp(36px, 4.57vw, 64px) var(--pad); display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--g); }
+  .cover-wall .browser { box-shadow: none; }
+  .cover-wall .crop { aspect-ratio: 1440 / 1000; }
+  .cover-wall p { color: #bdbdbd; font-size: 14px; font-weight: 600; margin-top: 12px; }
+  .cover-wall p b { color: #fff; }
+
+  /* ---------- Overview ---------- */
+  .overview { padding-top: clamp(64px, 7.43vw, 104px); padding-bottom: clamp(64px, 7.43vw, 104px); display: grid; grid-template-columns: 5fr 7fr; gap: clamp(32px, 4.57vw, 64px); align-items: start; }
+  .overview h2 { margin-bottom: 28px; }
+  .points { list-style: none; margin-top: 36px; border-top: 1px solid var(--ink); }
+  .points li { font-size: clamp(17px, 1.43vw, 20px); font-weight: 700; letter-spacing: -0.01em; padding: 15px 0 15px 26px; border-bottom: 1px solid var(--rule); position: relative; }
+  .points li::before { content: ""; position: absolute; left: 0; top: 50%; width: 10px; height: 10px; background: var(--ink); transform: translateY(-50%); }
+  .hero-shot { background: #f2f2f2; padding: clamp(20px, 3.43vw, 48px) clamp(16px, 2.29vw, 32px); }
+  .hero-shot img { width: 100%; }
+
+  /* ---------- Website designs intro ---------- */
+  .designs { border-top: 1px solid var(--rule); padding-top: clamp(64px, 7.43vw, 104px); padding-bottom: clamp(48px, 5.14vw, 72px); display: grid; grid-template-columns: 5fr 7fr; gap: clamp(32px, 4.57vw, 64px); }
+  .designs .lead { margin-top: 24px; }
+  .list { border-top: 1px solid var(--ink); }
+  .list div { display: grid; grid-template-columns: 44px 1fr auto 18px; gap: 16px; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--rule); font-size: 16px; }
+  .list span:first-child { color: var(--grey); font-weight: 600; font-variant-numeric: tabular-nums; }
+  .list b { font-weight: 700; font-size: 18px; }
+  .list em { font-style: normal; color: var(--grey); font-size: 14px; }
+  .list i { width: 18px; height: 18px; border-radius: 3px; }
+
+  /* ---------- Brand sections ---------- */
+  .site { background: var(--bg); color: var(--fg); padding: clamp(48px, 5.71vw, 80px) var(--pad); }
+  .site-head { display: grid; grid-template-columns: auto 1fr auto; gap: 28px; align-items: center; margin-bottom: clamp(28px, 3.14vw, 44px); }
+  .logo { width: var(--lw); border-radius: 6px; overflow: hidden; box-shadow: 0 0 0 1px rgba(0,0,0,.08); }
+  .site-head h3 { font-family: var(--font); font-weight: 700; font-size: clamp(30px, 3.43vw, 48px); letter-spacing: -0.02em; line-height: 1.05; }
+  .site-head p { font-size: 15px; opacity: .78; margin-top: 6px; }
+  .swatches { display: flex; gap: 10px; }
+  .swatches div { font-size: 11px; font-weight: 600; letter-spacing: .02em; opacity: .85; text-align: center; }
+  .swatches span { display: block; width: 46px; height: 46px; border-radius: 4px; margin-bottom: 6px; box-shadow: 0 0 0 1px rgba(127,127,127,.35); }
+  .main .crop { aspect-ratio: 1440 / 860; }
+  .row2 { display: grid; grid-template-columns: 7fr 5fr; gap: var(--g); margin-top: var(--g); }
+  .row2 .browser { min-width: 0; }
+  .row2 .crop { flex: 1; min-height: 300px; }
+  .details { display: flex; flex-direction: column; gap: var(--g); min-width: 0; }
+  .details .zoom { border-radius: 8px; box-shadow: 0 18px 40px rgba(0,0,0,.2); }
+  .note { display: grid; grid-template-columns: 7fr 5fr; gap: var(--g); margin-top: 18px; font-size: 14px; line-height: 1.5; }
+  .note p { opacity: .8; }
+  .note p b { font-weight: 700; opacity: 1; }
+
+  .s1 { --bg: #1f2228; --fg: #ffffff; --font: "Lexend", sans-serif; }
+  .s2 { --bg: #f36a3f; --fg: #ffffff; --font: "Poppins", sans-serif; }
+  .s3 { --bg: #000000; --fg: #ffffff; --font: "Hanken Grotesk", sans-serif; }
+  .s4 { --bg: #1e3a6e; --fg: #ffffff; --font: "Inter", sans-serif; }
+  .s5 { --bg: #e6b801; --fg: #2c2c2c; --font: "Archivo", sans-serif; }
+  .s6 { --bg: #f3f3f3; --fg: #111111; --font: "Roboto Condensed", sans-serif; }
+  .s6 .site-head h3 { text-transform: uppercase; letter-spacing: 0; }
+  .s3 .site-head h3 { color: #f3b607; }
+
+  /* ---------- Approach / Conclusion ---------- */
+  .text-block { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(32px, 4.57vw, 64px); padding-top: clamp(64px, 7.43vw, 104px); padding-bottom: clamp(64px, 7.43vw, 104px); }
+  .text-block + .text-block { border-top: 1px solid var(--rule); }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 2.86vw, 40px); }
+  .two p { font-size: clamp(18px, 1.57vw, 22px); font-weight: 600; line-height: 1.45; letter-spacing: -0.01em; padding-top: 18px; border-top: 2px solid var(--ink); }
+  .credit { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; padding-top: 20px; padding-bottom: 28px; border-top: 1px solid var(--rule); font-size: 14px; color: var(--grey); font-weight: 500; }
+
+  /* ---------- Related work ---------- */
+  .related { background: var(--black); color: #fff; padding: clamp(56px, 6.86vw, 96px) var(--pad); }
+  .rel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--g); margin-top: 40px; }
+  .rel .pic { aspect-ratio: 3 / 2; overflow: hidden; border-radius: 6px; }
+  .rel img { width: 100%; height: 100%; object-fit: cover; }
+  .rel p { margin-top: 18px; font-size: 13px; font-weight: 700; letter-spacing: .08em; color: #9a9a9a; }
+  .rel h4 { margin-top: 8px; font-size: clamp(21px, 1.86vw, 26px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; }
+
+  /* ================= Responsive ================= */
+  @media (max-width: 1200px) {
+    .cover-head { grid-template-columns: 1fr 1fr; }
+    .swatches span { width: 38px; height: 38px; }
+  }
+  @media (max-width: 1024px) {
+    .cover-head, .overview, .designs, .text-block { grid-template-columns: 1fr; gap: 32px; }
+    .cover-wall { grid-template-columns: 1fr 1fr; }
+    .site-head { grid-template-columns: auto 1fr; }
+    .swatches { grid-column: 1 / -1; }
+    .row2, .note { grid-template-columns: 1fr; }
+    .row2 .crop { flex: none; aspect-ratio: 1440 / 1300; min-height: 0; }
+    .details { flex-direction: row; }
+    .details .zoom { flex: 1; min-width: 0; }
+    .note p + p { margin-top: -6px; }
+  }
+  @media (max-width: 768px) {
+    .cover-top span:last-child { display: none; }
+    .site-head { grid-template-columns: 1fr; gap: 16px; }
+    .two, .rel-grid { grid-template-columns: 1fr; }
+    .bar { height: 24px; } .bar i { width: 8px; height: 8px; }
+  }
+  @media (max-width: 480px) {
+    .cover-wall { grid-template-columns: 1fr; }
+    .details { flex-direction: column; }
+    .info { grid-template-columns: 1fr; }
+    .info .full { grid-column: auto; }
+    .list div { grid-template-columns: 30px 1fr 18px; }
+    .list em { display: none; }
+    .swatches span { width: 34px; height: 34px; }
+  }
+
+  /* Related work: 2 columns from 768px (Bootstrap md), 1 column below */
+  @media (min-width: 768px) {
+    .rel-grid { grid-template-columns: 1fr 1fr; }
+    .g12 > .rel { grid-column: span 6; }
+    .g12 > .rel + .rel { margin-top: 0; }
+  }
+  @media (max-width: 767.98px) {
+    .rel-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Cover -->
+  <div class="wrap">
+    <div class="cover-top"><span>Bishwajeet Gupta</span><span>Website UI Design, Figma</span></div>
+    <div class="cover-head">
+      <div>
+        <div class="kicker">Website UI Design &nbsp;/&nbsp; Figma</div>
+        <h1>Website UI Design: 6 Websites</h1>
+      </div>
+      <div class="info">
+        <div><small>Projects</small><b>6 Websites</b></div>
+        <div><small>Category</small><b>Website UI Design</b></div>
+        <div><small>Tools</small><b>Figma</b></div>
+        <div><small>Role</small><b>Senior UI/UX Designer</b></div>
+        <div class="full"><small>Scope</small><b>Full website UI design</b></div>
+      </div>
+    </div>
+  </div>
+  <div class="cover-wall">
+    <div><div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="crop"><img src="hd/projects/projects/firearms-brand.jpg" alt="Firearms Brand"></div></div><p><b>Firearms Brand</b></p></div>
+    <div><div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="crop"><img src="hd/projects/projects/event-platform.jpg" alt="Event and Venue Platform"></div></div><p><b>Event &amp; Venue Platform</b></p></div>
+    <div><div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="crop"><img src="hd/projects/projects/shopping-mall.jpg" alt="Shopping Mall"></div></div><p><b>Shopping Mall</b></p></div>
+    <div><div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="crop"><img src="hd/projects/projects/government-portal.jpg" alt="Government Portal"></div></div><p><b>Government Portal</b></p></div>
+    <div><div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="crop"><img src="hd/projects/projects/hr-consulting.jpg" alt="HR Consulting Firm"></div></div><p><b>HR Consulting Firm</b></p></div>
+    <div><div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="crop"><img src="hd/projects/projects/fragrance-brand.jpg" alt="Fragrance Brand"></div></div><p><b>Fragrance Brand</b></p></div>
+  </div>
+
+  <!-- Overview -->
+  <div class="wrap overview">
+    <div>
+      <h2 class="title">Overview</h2>
+      <p class="lead">This is a set of 6 website UI designs that I created for different clients and brands. I designed each site in Figma, page by page. Each one has a clear layout, a strong first screen and a simple path for visitors to reach the key action.</p>
+      <p class="lead">The work covered the full design of each website, from the home page to the inner pages. Every layout was designed for desktop first and then adjusted for tablet and mobile. This way, the content order and spacing still work on small screens.</p>
+      <ul class="points">
+        <li>6 full website UI designs</li>
+        <li>A clear layout with a strong first screen</li>
+        <li>Responsive layouts for desktop, tablet and mobile</li>
+        <li>Consistent type, spacing and calls to action</li>
+      </ul>
+    </div>
+    <div class="hero-shot"><img src="hd/portfolios/hero-website-ui.jpg" alt="Website UI Design, desktop mockup"></div>
+  </div>
+
+  <!-- Website designs intro -->
+  <div class="wrap designs">
+    <div>
+      <h2 class="title">Website designs</h2>
+      <p class="lead">Each website below is shown in its own colours. The large view shows the top of the home page. The second view shows a part further down the same page, and the close-ups show real details from the design.</p>
+    </div>
+    <div class="list">
+      <div><span>01</span><b>Firearms Brand</b><em>Brand website</em><i style="background:#015bfe"></i></div>
+      <div><span>02</span><b>Event &amp; Venue Platform</b><em>Platform website</em><i style="background:#f36a3f"></i></div>
+      <div><span>03</span><b>Shopping Mall</b><em>Retail website</em><i style="background:#f3b607"></i></div>
+      <div><span>04</span><b>Government Portal</b><em>Public sector portal</em><i style="background:#1e3a6e"></i></div>
+      <div><span>05</span><b>HR Consulting Firm</b><em>Services website</em><i style="background:#e6b801"></i></div>
+      <div><span>06</span><b>Fragrance Brand</b><em>Brand online store</em><i style="background:#111111"></i></div>
+    </div>
+  </div>
+
+  <!-- 1. Firearms Brand -->
+  <section class="site s1">
+    <div class="site-head">
+      <div class="logo zoom" style="--lw:200px;--iw:1425;--x:52;--y:38;--cw:204;--ch:56"><img src="hd/projects/projects/firearms-brand.jpg" alt="Firearms Brand logo"></div>
+      <div><h3>Firearms Brand</h3><p>Brand website</p></div>
+      <div class="swatches"><div><span style="background:#015bfe"></span>#015BFE</div><div><span style="background:#1f2228"></span>#1F2228</div><div><span style="background:#ffffff"></span>#FFFFFF</div></div>
+    </div>
+    <div class="browser main"><div class="bar"><i></i><i></i><i></i></div><div class="crop"><img src="hd/projects/projects/firearms-brand.jpg" alt="Firearms Brand, top of the home page"></div></div>
+    <div class="row2">
+      <div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="crop" style="--y:91%"><img src="hd/projects/projects/firearms-brand.jpg" alt="Firearms Brand, products and project sections"></div></div>
+      <div class="details">
+        <div class="zoom" style="--iw:1425;--x:420;--y:340;--cw:600;--ch:450"><img src="hd/projects/projects/firearms-brand.jpg" alt="Close-up of the hero title and buttons"></div>
+        <div class="zoom" style="--iw:1425;--x:0;--y:580;--cw:600;--ch:450"><img src="hd/projects/projects/firearms-brand.jpg" alt="Close-up of the numbered image cards"></div>
+      </div>
+    </div>
+    <div class="note"><p><b>Top of the page.</b> Dark hero with product photography and five numbered image cards. <b>Further down.</b> Product tiles and a project block on a light background.</p><p><b>Close-ups.</b> The blue primary button next to the outline button, and the first numbered image card.</p></div>
+  </section>
+
+  <!-- 2. Event & Venue Platform -->
+  <section class="site s2">
+    <div class="site-head">
+      <div class="logo zoom" style="--lw:160px;--iw:1440;--x:234;--y:12;--cw:160;--ch:48"><img src="hd/projects/projects/event-platform.jpg" alt="Event and Venue Platform logo"></div>
+      <div><h3>Event &amp; Venue Platform</h3><p>Platform website</p></div>
+      <div class="swatches"><div><span style="background:#f36a3f"></span>#F36A3F</div><div><span style="background:#16171b"></span>#16171B</div><div><span style="background:#ffffff"></span>#FFFFFF</div></div>
+    </div>
+    <div class="browser main"><div class="bar"><i></i><i></i><i></i></div><div class="crop"><img src="hd/projects/projects/event-platform.jpg" alt="Event and Venue Platform, top of the home page"></div></div>
+    <div class="row2">
+      <div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="crop" style="--y:219%"><img src="hd/projects/projects/event-platform.jpg" alt="Event and Venue Platform, gallery and posts"></div></div>
+      <div class="details">
+        <div class="zoom" style="--iw:1440;--x:460;--y:325;--cw:600;--ch:450"><img src="hd/projects/projects/event-platform.jpg" alt="Close-up of the hero title and buttons"></div>
+        <div class="zoom" style="--iw:1440;--x:156;--y:980;--cw:600;--ch:450"><img src="hd/projects/projects/event-platform.jpg" alt="Close-up of the event cards"></div>
+      </div>
+    </div>
+    <div class="note"><p><b>Top of the page.</b> Full-width photo hero with orange buttons, then a row of event cards. <b>Further down.</b> Photo gallery, post cards and a dark testimonial band.</p><p><b>Close-ups.</b> The event details row with an outline and an orange button, and an event card.</p></div>
+  </section>
+
+  <!-- 3. Shopping Mall -->
+  <section class="site s3">
+    <div class="site-head">
+      <div class="logo zoom" style="--lw:210px;--iw:1440;--x:596;--y:228;--cw:228;--ch:74"><img src="hd/projects/projects/shopping-mall.jpg" alt="Shopping Mall logo"></div>
+      <div><h3>Shopping Mall</h3><p>Retail website</p></div>
+      <div class="swatches"><div><span style="background:#f3b607"></span>#F3B607</div><div><span style="background:#000000"></span>#000000</div><div><span style="background:#ffffff"></span>#FFFFFF</div></div>
+    </div>
+    <div class="browser main"><div class="bar"><i></i><i></i><i></i></div><div class="crop"><img src="hd/projects/projects/shopping-mall.jpg" alt="Shopping Mall, top of the home page"></div></div>
+    <div class="row2">
+      <div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="crop" style="--y:115%"><img src="hd/projects/projects/shopping-mall.jpg" alt="Shopping Mall, shop, dine and brands sections"></div></div>
+      <div class="details">
+        <div class="zoom" style="--iw:1440;--x:0;--y:591;--cw:600;--ch:450"><img src="hd/projects/projects/shopping-mall.jpg" alt="Close-up of the key numbers and What's New"></div>
+        <div class="zoom" style="--iw:1440;--x:0;--y:2455;--cw:600;--ch:450"><img src="hd/projects/projects/shopping-mall.jpg" alt="Close-up of the brand cards"></div>
+      </div>
+    </div>
+    <div class="note"><p><b>Top of the page.</b> Green, leafy hero with a row of key numbers below it. <b>Further down.</b> Three image tiles and a grid of brand logo cards.</p><p><b>Close-ups.</b> The row of key numbers, and the brand logo cards with a category filter.</p></div>
+  </section>
+
+  <!-- 4. Government Portal -->
+  <section class="site s4">
+    <div class="site-head">
+      <div class="logo zoom" style="--lw:220px;--iw:1280;--x:92;--y:38;--cw:220;--ch:60"><img src="hd/projects/projects/government-portal.jpg" alt="Government Portal logo"></div>
+      <div><h3>Government Portal</h3><p>Public sector portal</p></div>
+      <div class="swatches"><div><span style="background:#1e3a6e"></span>#1E3A6E</div><div><span style="background:#d01411"></span>#D01411</div><div><span style="background:#2d9e5c"></span>#2D9E5C</div></div>
+    </div>
+    <div class="browser main"><div class="bar"><i></i><i></i><i></i></div><div class="crop"><img src="hd/projects/projects/government-portal.jpg" alt="Government Portal, top of the home page"></div></div>
+    <div class="row2">
+      <div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="crop" style="--y:126%"><img src="hd/projects/projects/government-portal.jpg" alt="Government Portal, agreements and news sections"></div></div>
+      <div class="details">
+        <div class="zoom" style="--iw:1280;--x:480;--y:825;--cw:600;--ch:450"><img src="hd/projects/projects/government-portal.jpg" alt="Close-up of the trade figure charts"></div>
+        <div class="zoom" style="--iw:1280;--x:6;--y:270;--cw:600;--ch:450"><img src="hd/projects/projects/government-portal.jpg" alt="Close-up of the department cards"></div>
+      </div>
+    </div>
+    <div class="note"><p><b>Top of the page.</b> Light hero with portraits, department cards and ring charts. <b>Further down.</b> Flag icons, icon cards and image-led news blocks.</p><p><b>Close-ups.</b> The ring charts for trade figures, and the hero text with its red and outline buttons.</p></div>
+  </section>
+
+  <!-- 5. HR Consulting Firm -->
+  <section class="site s5">
+    <div class="site-head">
+      <div class="logo zoom" style="--lw:210px;--iw:1440;--x:160;--y:20;--cw:214;--ch:56"><img src="hd/projects/projects/hr-consulting.jpg" alt="HR Consulting Firm logo"></div>
+      <div><h3>HR Consulting Firm</h3><p>Services website</p></div>
+      <div class="swatches"><div><span style="background:#e6b801"></span>#E6B801</div><div><span style="background:#2c2c2c"></span>#2C2C2C</div><div><span style="background:#ffffff"></span>#FFFFFF</div></div>
+    </div>
+    <div class="browser main"><div class="bar"><i></i><i></i><i></i></div><div class="crop"><img src="hd/projects/projects/hr-consulting.jpg" alt="HR Consulting Firm, top of the home page"></div></div>
+    <div class="row2">
+      <div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="crop" style="--y:132%"><img src="hd/projects/projects/hr-consulting.jpg" alt="HR Consulting Firm, inner sections"></div></div>
+      <div class="details">
+        <div class="zoom" style="--iw:1440;--x:60;--y:220;--cw:600;--ch:450"><img src="hd/projects/projects/hr-consulting.jpg" alt="Close-up of the hero title with the yellow highlight"></div>
+        <div class="zoom" style="--iw:1440;--x:40;--y:580;--cw:600;--ch:450"><img src="hd/projects/projects/hr-consulting.jpg" alt="Close-up of the dark service cards"></div>
+      </div>
+    </div>
+    <div class="note"><p><b>Top of the page.</b> Office photo hero with a yellow highlight and a dark row of service cards. <b>Further down.</b> Image and text blocks with yellow accents.</p><p><b>Close-ups.</b> The hero title with the yellow ring, and the dark service cards with yellow icons.</p></div>
+  </section>
+
+  <!-- 6. Fragrance Brand -->
+  <section class="site s6">
+    <div class="site-head">
+      <div class="logo zoom" style="--lw:250px;--iw:1440;--x:86;--y:48;--cw:264;--ch:60"><img src="hd/projects/projects/fragrance-brand.jpg" alt="Fragrance Brand logo"></div>
+      <div><h3>Fragrance Brand</h3><p>Brand online store</p></div>
+      <div class="swatches"><div><span style="background:#111111"></span>#111111</div><div><span style="background:#c0c0c0"></span>#C0C0C0</div><div><span style="background:#ffffff"></span>#FFFFFF</div></div>
+    </div>
+    <div class="browser main"><div class="bar"><i></i><i></i><i></i></div><div class="crop"><img src="hd/projects/projects/fragrance-brand.jpg" alt="Fragrance Brand, top of the home page"></div></div>
+    <div class="row2">
+      <div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="crop" style="--y:153%"><img src="hd/projects/projects/fragrance-brand.jpg" alt="Fragrance Brand, product sections"></div></div>
+      <div class="details">
+        <div class="zoom" style="--iw:1440;--x:28;--y:155;--cw:600;--ch:450"><img src="hd/projects/projects/fragrance-brand.jpg" alt="Close-up of the hero title"></div>
+        <div class="zoom" style="--iw:1440;--x:0;--y:991;--cw:600;--ch:450"><img src="hd/projects/projects/fragrance-brand.jpg" alt="Close-up of the product grid"></div>
+      </div>
+    </div>
+    <div class="note"><p><b>Top of the page.</b> Black and white hero with a bold uppercase title, then a product grid. <b>Further down.</b> Product blocks with vertical titles on a white background.</p><p><b>Close-ups.</b> The condensed uppercase hero title, and a product card.</p></div>
+  </section>
+
+  <!-- Approach -->
+  <div class="wrap text-block">
+    <h2 class="title">Approach</h2>
+    <div>
+      <p class="lead">Each brand had a different look. The challenge was to give every site its own feel while keeping the same care for layout, spacing and readability. Visitors needed to understand what the brand offers within the first screen.</p>
+      <p class="lead">I started each design with the home page and set the type and spacing scale. Then I designed the inner pages on the same grid. This kept every site clean and easy to scan, and it made the handoff to development simple.</p>
+    </div>
+  </div>
+
+  <!-- Conclusion -->
+  <div class="wrap text-block">
+    <h2 class="title">Conclusion</h2>
+    <div class="two">
+      <p>Across all 6 websites, the goal was the same: a clear first screen, an easy path through the pages and a design that fits the brand.</p>
+      <p>Each design is responsive and built on a consistent grid, so the sites read well on desktop, tablet and mobile.</p>
+    </div>
+  </div>
+  <div class="wrap"><div class="credit"><span>Bishwajeet Gupta, Senior UI/UX Designer</span><span>Website UI Design, Figma, 6 Websites</span></div></div>
+
+
+</div>
+<script>
+  window.addEventListener('load', function () {
+    document.body.setAttribute('data-h', document.documentElement.scrollHeight);
+    var m = location.hash.match(/y=(\d+)/);
+    if (m) { document.querySelector('.page').style.marginTop = (-parseInt(m[1], 10)) + 'px'; }
+  });
+</script>
+</body>
+</html>

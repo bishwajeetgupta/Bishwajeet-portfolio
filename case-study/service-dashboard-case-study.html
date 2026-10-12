@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Service Management Dashboard &amp; CRM UI | Bishwajeet Gupta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* Palette sampled from the ServiceDash screens (System.Drawing GetPixel):
+     #0B7BD7 logo blue, #0197E1 button blue, #40C8F3 sidebar active,
+     #DEE0E4 sidebar grey, #F2F3F9 app background, #111111 text */
+  :root {
+    --blue: #0B7BD7;
+    --btn: #0197E1;
+    --cyan: #40C8F3;
+    --side: #DEE0E4;
+    --app: #F2F3F9;
+    --ink: #111111;
+    --grey: #5f6470;
+    --line: #DEE0E4;
+    --pad: clamp(24px, 5.14vw, 72px);
+    --gap: 12px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--app); color: var(--ink); font-family: "Open Sans", Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+  img { display: block; max-width: 100%; }
+  .page { width: 100%; max-width: 1400px; margin: 0 auto; background: var(--app); display: flex; flex-direction: column; }
+  .sec { padding: clamp(48px, 6.86vw, 96px) var(--pad); }
+  .white { background: #fff; }
+  .blue { background: var(--blue); color: #fff; }
+  .g12 { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: clamp(16px, 1.71vw, 24px); }
+  h2 { font-size: clamp(34px, 3.71vw, 52px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; }
+  .txt p { font-size: clamp(16px, 1.21vw, 17px); line-height: 1.75; color: #3b404a; }
+  .txt p + p { margin-top: 16px; }
+  .blue .txt p { color: rgba(255,255,255,.88); }
+  .list { list-style: none; margin-top: 26px; border-top: 1px solid var(--line); }
+  .list li { padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 17px; font-weight: 600; display: flex; gap: 14px; align-items: baseline; }
+  .list li::before { content: ""; width: 8px; height: 8px; background: var(--blue); flex-shrink: 0; transform: translateY(-2px); }
+  .cap { font-size: 14px; font-weight: 600; color: var(--grey); margin-top: 14px; }
+  .blue .cap { color: rgba(255,255,255,.85); }
+
+  /* crop: zoom into a real screenshot. --x, --y, --w, --h are in image pixels, --iw is the image width */
+  .crop { position: relative; overflow: hidden; aspect-ratio: var(--w) / var(--h); background: #fff; }
+  .crop img { position: absolute; max-width: none; width: calc(var(--iw) / var(--w) * 100%); left: calc(var(--x) / var(--w) * -100%); top: calc(var(--y) / var(--h) * -100%); }
+  .logo { --iw: 1920; --x: 36; --y: 40; --w: 204; --h: 50; width: clamp(150px, 14.57vw, 204px); background: var(--side); }
+
+  /* frames */
+  .browser { border-radius: 10px; overflow: hidden; background: #fff; border: 1px solid #d3d6dd; box-shadow: 0 24px 60px rgba(17,17,17,.12); }
+  .browser .bar { height: 34px; background: #fff; border-bottom: 1px solid #e6e8ec; display: flex; align-items: center; gap: 7px; padding: 0 14px; }
+  .browser .bar i { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; }
+  .browser .bar i:nth-child(1) { background: #ff5f57; } .browser .bar i:nth-child(2) { background: #febc2e; } .browser .bar i:nth-child(3) { background: #28c840; }
+  .browser .bar span { margin-left: 14px; font-size: 12px; color: #7a808c; background: var(--app); padding: 4px 14px; border-radius: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+  .view { overflow: hidden; }
+  .view img { width: 100%; height: 100%; object-fit: cover; object-position: top left; }
+  .phone { width: 100%; aspect-ratio: 9 / 19; border-radius: clamp(24px, 2.86vw, 40px); background: #111; padding: clamp(6px, .64vw, 9px); position: relative; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,.28); }
+  .phone::before { content: ""; position: absolute; top: 2.4%; left: 50%; width: 28%; height: 2.8%; border-radius: 999px; background: #111; transform: translateX(-50%); z-index: 2; }
+  .phone .scr { width: 100%; height: 100%; border-radius: clamp(18px, 2.29vw, 32px); overflow: hidden; background: #fff; }
+  .phone .scr img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+
+  /* ---------- Cover ---------- */
+  .topstrip { background: var(--side); padding: 18px var(--pad); display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .topstrip span { font-size: 14px; color: #4a4f5a; font-weight: 600; }
+  .cover { padding: clamp(48px, 5.71vw, 80px) var(--pad) 0; }
+  .cover .kind { font-size: 15px; font-weight: 600; color: rgba(255,255,255,.85); }
+  .cover h1 { grid-column: 1 / span 9; font-size: clamp(44px, 5.71vw, 80px); font-weight: 800; line-height: 1.04; letter-spacing: -0.03em; margin-top: 16px; }
+  .info { display: grid; grid-template-columns: 1.1fr 1fr .8fr .7fr 1.2fr; gap: var(--gap); margin-top: clamp(36px, 4vw, 56px); }
+  .info div { background: #fff; color: var(--ink); border-radius: 8px; padding: 18px 20px 20px; }
+  .info small { display: block; font-size: 13px; color: var(--grey); margin-bottom: 10px; }
+  .info b { font-size: clamp(17px, 1.43vw, 20px); font-weight: 700; line-height: 1.3; }
+  .info .ok b { color: #058742; }
+  .hero-wrap { margin-top: clamp(40px, 4.6vw, 64px); background: #fff; border-radius: 12px 12px 0 0; padding: clamp(20px, 3vw, 44px) clamp(12px, 2vw, 28px) 0; overflow: hidden; }
+  .hero-wrap img { width: 100%; }
+
+  /* ---------- Overview ---------- */
+  .ov .txt { grid-column: 1 / span 6; }
+  .ov .order { grid-column: 8 / span 5; }
+  .ov h2 { margin-bottom: 26px; }
+  .order h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+  .order > p { font-size: 15px; color: var(--grey); line-height: 1.6; }
+  .order ol { list-style: none; margin-top: 20px; border-top: 2px solid var(--ink); }
+  .order li { display: grid; grid-template-columns: 44px 1fr; gap: 10px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .order li b { font-size: 15px; color: var(--blue); }
+  .order li strong { display: block; font-size: 17px; }
+  .order li span { font-size: 15px; color: var(--grey); line-height: 1.55; }
+  .ov-shot { grid-column: 1 / -1; margin-top: clamp(40px, 4.6vw, 64px); }
+  .hero-kpi { --iw: 1600; --x: 282; --y: 160; --w: 786; --h: 474; border-radius: 10px; border: 1px solid var(--line); }
+
+  /* ---------- Design system ---------- */
+  .ds-head h2 { grid-column: 1 / span 5; }
+  .ds-head .txt { grid-column: 7 / span 6; }
+  .ds-board { margin-top: clamp(36px, 4vw, 56px); }
+  .details { display: grid; grid-template-columns: repeat(12, 1fr); gap: clamp(16px, 1.71vw, 24px); margin-top: clamp(16px, 1.71vw, 24px); }
+  .detail { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 18px; display: flex; flex-direction: column; }
+  .detail .crop { border-radius: 6px; margin: auto 0; width: 100%; }
+  .detail h4 { font-size: 15px; font-weight: 700; margin-top: 14px; }
+  .detail.d7 { grid-column: span 7; } .detail.d5 { grid-column: span 5; }
+  .c-table { --iw: 1920; --x: 392; --y: 228; --w: 1430; --h: 370; }
+  .c-tags { --iw: 1536; --x: 1040; --y: 458; --w: 296; --h: 140; }
+  .c-kpi { --iw: 1536; --x: 1036; --y: 108; --w: 470; --h: 88; }
+  .c-type { --iw: 1536; --x: 36; --y: 512; --w: 380; --h: 145; }
+
+  /* Live components rebuilt in HTML from the ServiceDash design system tokens (sharp at any size) */
+  .ui { --p: #0078D4; --ok: #0E8F3E; --err: #CB102E; --info: #0D6EFD; --warn: #F5B300; --t1: #111111; --t2: #666666; --bd: #E6E8EE;
+        font-family: "Inter", "Open Sans", Arial, sans-serif; color: var(--t1); margin: auto 0; width: 100%; }
+  .ui-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .ui-kpi { border: 1px solid var(--bd); border-radius: 10px; padding: 14px 14px 12px; background: #fff; }
+  .ui-kpi .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 6px; }
+  .ui-kpi .lbl { font-size: 11px; font-weight: 500; color: #333; line-height: 1.3; }
+  .ui-kpi .ic { width: 26px; height: 26px; border-radius: 7px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .ui-kpi .ic svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .ui-kpi .val { font-size: 22px; font-weight: 700; margin-top: 8px; letter-spacing: -0.01em; }
+  .ui-kpi .chg { font-size: 10.5px; color: var(--t2); margin-top: 4px; white-space: nowrap; }
+  .ui-kpi .chg b { color: var(--ok); font-weight: 600; }
+  .ui-type { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px 14px; }
+  .ui-type .s { font-weight: 700; line-height: 1.15; white-space: nowrap; }
+  .ui-type .m { font-size: 12px; color: var(--t2); margin-top: 6px; line-height: 1.45; }
+  .ui-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .ui-table th { text-align: left; font-weight: 500; font-size: 11px; color: var(--t2); padding: 0 8px 10px; border-bottom: 1px solid var(--bd); }
+  .ui-table td { padding: 10px 8px; border-bottom: 1px solid var(--bd); white-space: nowrap; }
+  .ui-table tr:last-child td { border-bottom: 0; }
+  .tag { display: inline-block; font-size: 10.5px; font-weight: 600; padding: 3px 8px; border-radius: 999px; border: 1px solid; }
+  .tag.ok { color: var(--ok); background: #E8F5EE; border-color: #BFE3CD; }
+  .tag.pr { color: var(--info); background: #EAF1FF; border-color: #C3D6FD; }
+  .tag.err { color: var(--err); background: #FDECEF; border-color: #F5C2CB; }
+  .ui-panel { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 18px; display: grid; grid-template-columns: 1.7fr 1fr; gap: 18px; }
+  .ui-panel h5 { font-size: 13px; font-weight: 600; margin-bottom: 12px; }
+  .ui-panel .all { display: block; text-align: right; font-size: 11px; font-weight: 600; color: var(--p); margin-top: 8px; }
+  .ui-qa { display: flex; flex-direction: column; gap: 8px; }
+  .ui-qa div { display: flex; align-items: center; gap: 10px; border: 1px solid var(--bd); border-radius: 8px; padding: 10px 12px; font-size: 12px; font-weight: 500; }
+  .ui-qa svg { width: 15px; height: 15px; fill: none; stroke: var(--p); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+  .ui-qa div::after { content: "+"; margin-left: auto; color: var(--p); font-size: 15px; font-weight: 600; }
+
+  /* ---------- Selected screens ---------- */
+  .sc-head h2 { grid-column: 1 / span 5; }
+  .sc-head .txt { grid-column: 7 / span 6; align-self: end; }
+  .big { margin-top: clamp(36px, 4vw, 56px); }
+  .big .view { aspect-ratio: 1920 / 1150; }
+  .web3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 1.71vw, 24px); margin-top: clamp(32px, 3.4vw, 48px); }
+  .web3 .view { aspect-ratio: 16 / 11; }
+  .mob { padding: clamp(48px, 6.86vw, 96px) var(--pad); }
+  .mob h3 { font-size: clamp(26px, 2.57vw, 36px); font-weight: 700; letter-spacing: -0.01em; }
+  .mob .txt { margin-top: 12px; }
+  .phones { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 4vw, 56px); margin-top: clamp(36px, 4vw, 56px); padding: 0 clamp(0px, 4vw, 56px); }
+  .phones .cap { text-align: center; }
+
+  /* ---------- Challenges & solutions ---------- */
+  .cs-grid { margin-top: clamp(32px, 3.4vw, 48px); display: grid; grid-template-columns: 1fr 1fr; border-top: 2px solid var(--ink); }
+  .cs-grid > div { padding: 28px 0 0; }
+  .cs-grid > div + div { padding-left: clamp(24px, 3.4vw, 48px); border-left: 1px solid var(--line); }
+  .cs-grid > div:first-child { padding-right: clamp(24px, 3.4vw, 48px); }
+  .cs-grid h3 { font-size: 22px; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 12px; }
+  .cs-grid h3 i { width: 12px; height: 12px; background: #971E20; flex-shrink: 0; }
+  .cs-grid .sol h3 i { background: #058742; }
+  .c-alerts { --iw: 1536; --x: 1036; --y: 428; --w: 470; --h: 196; border-radius: 10px; border: 1px solid var(--line); }
+  .c-sub { --iw: 1920; --x: 400; --y: 92; --w: 1420; --h: 592; border-radius: 10px; border: 1px solid var(--line); }
+  .cs-shots { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 1.71vw, 24px); margin-top: clamp(36px, 4vw, 56px); align-items: start; }
+
+  /* ---------- Conclusion ---------- */
+  .con-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 3.4vw, 48px); margin-top: clamp(28px, 3vw, 40px); }
+  .con-grid p { font-size: clamp(17px, 1.43vw, 20px); line-height: 1.65; color: #fff; }
+
+  /* ---------- Related work ---------- */
+  .rel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 2vw, 28px); margin-top: clamp(32px, 3.4vw, 48px); }
+  .rel .img { aspect-ratio: 3 / 2; border-radius: 10px; overflow: hidden; }
+  .rel .img img { width: 100%; height: 100%; object-fit: cover; }
+  .rel .tags { font-size: 13px; font-weight: 700; letter-spacing: .06em; color: var(--blue); margin: 18px 0 6px; }
+  .rel h4 { font-size: clamp(20px, 1.71vw, 24px); font-weight: 700; }
+
+  /* ---------- End ---------- */
+  .end { background: var(--side); padding: 28px var(--pad); display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .end span { font-size: 15px; font-weight: 600; color: #3b404a; }
+
+  /* ================= Responsive ================= */
+  @media (max-width: 1200px) {
+    .info { grid-template-columns: repeat(3, 1fr); }
+    .info div:nth-child(5) { grid-column: span 2; }
+    .ov .txt { grid-column: 1 / span 7; }
+    .ov .order { grid-column: 8 / span 5; }
+  }
+  @media (max-width: 1024px) {
+    .cover h1 { grid-column: 1 / -1; }
+    .ov .txt, .ov .order, .ds-head h2, .ds-head .txt, .sc-head h2, .sc-head .txt { grid-column: 1 / -1; }
+    .ov .order, .ds-head .txt, .sc-head .txt { margin-top: 24px; }
+    .detail.d7, .detail.d5 { grid-column: span 12; }
+    .web3 { grid-template-columns: 1fr 1fr; }
+    .web3 > div:last-child { grid-column: span 2; }
+    .web3 > div:last-child .view { aspect-ratio: 16 / 9; }
+    .phones { padding: 0; }
+  }
+  @media (max-width: 768px) {
+    .ui-kpis { grid-template-columns: 1fr 1fr; }
+    .ui-panel { grid-template-columns: 1fr; }
+    .ui-table td { white-space: normal; }
+    .ui-type { grid-template-columns: 1fr 1fr; }
+    .info { grid-template-columns: 1fr 1fr; }
+    .info div:nth-child(5) { grid-column: span 2; }
+    .cs-grid, .cs-shots, .con-grid, .rel-grid { grid-template-columns: 1fr; }
+    .cs-grid > div:first-child { padding-right: 0; padding-bottom: 28px; }
+    .cs-grid > div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); }
+    .web3 { grid-template-columns: 1fr; }
+    .web3 > div:last-child { grid-column: auto; }
+    .web3 > div:last-child .view { aspect-ratio: 16 / 11; }
+    .browser .bar span { display: none; }
+    .phones { gap: 14px; }
+  }
+  @media (max-width: 480px) {
+    .info { grid-template-columns: 1fr; }
+    .info div:nth-child(5) { grid-column: auto; }
+    .phones { grid-template-columns: 1fr 1fr; }
+    .phones > div:last-child { grid-column: span 2; width: 50%; justify-self: center; }
+    .topstrip span { font-size: 12px; }
+    .list li { font-size: 16px; }
+  }
+
+  /* Related work: 2 columns from 768px (Bootstrap md), 1 column below */
+  @media (min-width: 768px) {
+    .rel-grid { grid-template-columns: 1fr 1fr; }
+    .g12 > .rel { grid-column: span 6; }
+    .g12 > .rel + .rel { margin-top: 0; }
+  }
+  @media (max-width: 767.98px) {
+    .rel-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Cover -->
+  <div class="topstrip">
+    <div class="crop logo"><img src="hd/projects/service-dashboard/screen-1.jpg" alt="ServiceDash"></div>
+    <span>Case study by Bishwajeet Gupta, Senior UI/UX Designer</span>
+  </div>
+  <section class="blue cover">
+    <div class="kind">Internal Dashboard UI &nbsp;/&nbsp; Design System</div>
+    <div class="g12"><h1>Service Management Dashboard &amp; CRM UI</h1></div>
+    <div class="info">
+      <div><small>Client</small><b>HVAC Company (Confidential)</b></div>
+      <div><small>Category</small><b>Internal Dashboard UI</b></div>
+      <div><small>Tools</small><b>Figma, HTML</b></div>
+      <div class="ok"><small>Status</small><b>Shipped</b></div>
+      <div><small>Scope</small><b>Service &amp; maintenance tracking</b></div>
+    </div>
+    <div class="hero-wrap"><img src="hd/portfolios/hero-service-dashboard.jpg" alt="Service Management Dashboard on desktop and mobile"></div>
+  </section>
+
+  <!-- Overview -->
+  <section class="sec white">
+    <div class="g12 ov">
+      <div class="txt">
+        <h2>Overview</h2>
+        <p>This is an internal management system for tracking service units, requests and maintenance history. The dashboard had to present dense operational data clearly, so that staff could scan it and act on it quickly.</p>
+        <p>In a data-heavy internal tool like this, the design work was less about visual decoration. It was more about information hierarchy: making sure that the most actionable data, such as open requests and SLA status, appeared first.</p>
+        <ul class="list">
+          <li>Data-dense dashboard UI</li>
+          <li>Service &amp; maintenance tracking</li>
+          <li>Open requests &amp; SLA status first</li>
+          <li>Consistent status tags for fast scanning</li>
+        </ul>
+      </div>
+      <div class="order">
+        <h3>Information hierarchy</h3>
+        <p>The order in which data appears on the screen.</p>
+        <ol>
+          <li><b>1</b><div><strong>Open requests</strong><span>The most actionable data, placed at the top.</span></div></li>
+          <li><b>2</b><div><strong>SLA status</strong><span>Shown together with the open requests.</span></div></li>
+          <li><b>3</b><div><strong>Status tags</strong><span>Scheduled, Review and OK, in one consistent style for fast scanning.</span></div></li>
+          <li><b>4</b><div><strong>Service &amp; maintenance records</strong><span>Service units, requests and maintenance history.</span></div></li>
+        </ol>
+      </div>
+      <div class="ov-shot">
+        <div class="crop hero-kpi"><img src="hd/portfolios/hero-service-dashboard.jpg" alt="Dashboard overview with charts and KPI cards"></div>
+        <div class="cap">Close-up of the web dashboard: charts and KPI cards on one screen.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Design system -->
+  <section class="sec">
+    <div class="g12 ds-head">
+      <h2>Design system</h2>
+      <div class="txt">
+        <p>I set up a compact type scale and consistent tag styling for statuses such as Scheduled, Review and OK. This lets staff scan dozens of rows at a glance without the interface feeling cluttered. The same components carry across the web dashboard and the mobile views.</p>
+        <ul class="list">
+          <li>Data table, status tag and KPI card components</li>
+          <li>Compact type scale for dense data</li>
+          <li>Consistent styling across web and mobile</li>
+        </ul>
+      </div>
+    </div>
+    <div class="browser ds-board">
+      <div class="bar"><i></i><i></i><i></i><span>service-dashboard.app/design-system</span></div>
+      <div class="view" style="aspect-ratio:1536/1024"><img src="hd/projects/service-dashboard/design-system.jpg" alt="Service management design system"></div>
+    </div>
+    <div class="details">
+      <div class="detail d7"><div class="crop c-table"><img src="hd/projects/service-dashboard/screen-1.jpg" alt="Data table rows"></div><h4>Data table</h4></div>
+      <div class="detail d5"><div class="ui">
+        <table class="ui-table">
+          <tr><th>Event</th><th>Status</th></tr>
+          <tr><td>High Power Consumption</td><td><span class="tag ok">Completed</span></td></tr>
+          <tr><td>Outdoor Unit Error</td><td><span class="tag pr">In Progress</span></td></tr>
+          <tr><td>Compressor Fault</td><td><span class="tag err">Failed</span></td></tr>
+          <tr><td>Sensor Disconnected</td><td><span class="tag ok">Completed</span></td></tr>
+        </table>
+      </div><h4>Status tags</h4></div>
+      <div class="detail d5"><div class="ui ui-type">
+        <div><div class="s" style="font-size:22px">Heading 1</div><div class="m">Inter Bold<br>32px / 40px</div></div>
+        <div><div class="s" style="font-size:19px">Heading 2</div><div class="m">Inter Bold<br>24px / 32px</div></div>
+        <div><div class="s" style="font-size:16px">Heading 3</div><div class="m">Inter Bold<br>18px / 24px</div></div>
+        <div><div class="s" style="font-size:14px;font-weight:500">Heading 4</div><div class="m">Inter Medium<br>16px / 24px</div></div>
+        <div><div class="s" style="font-size:14px;font-weight:400">Body 1</div><div class="m">Inter Regular<br>14px / 22px</div></div>
+        <div><div class="s" style="font-size:13px;font-weight:400">Body 2</div><div class="m">Inter Regular<br>13px / 20px</div></div>
+        <div><div class="s" style="font-size:12px;font-weight:400">Caption</div><div class="m">Inter Regular<br>12px / 18px</div></div>
+      </div><h4>Compact type scale</h4></div>
+      <div class="detail d7"><div class="ui ui-kpis">
+        <div class="ui-kpi"><div class="top"><span class="lbl">Total Units</span><span class="ic" style="background:#EAF3FC;color:#0078D4"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 7h.01M15 7h.01M9 11h.01M15 11h.01M9 15h.01M15 15h.01M10 21v-3h4v3"/></svg></span></div><div class="val">1,245</div><div class="chg"><b>+12.5%</b> vs last month</div></div>
+        <div class="ui-kpi"><div class="top"><span class="lbl">Energy Consumption (kWh)</span><span class="ic" style="background:#EAF3FC;color:#0078D4"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span></div><div class="val">2,580</div><div class="chg"><b>+15.3%</b> vs last month</div></div>
+        <div class="ui-kpi"><div class="top"><span class="lbl">Active Alarms</span><span class="ic" style="background:#FDECEF;color:#CB102E"><svg viewBox="0 0 24 24"><path d="M6 18v-6a6 6 0 0 1 12 0v6M4 18h16M12 3v1M4.5 6.5l.7.7M19.5 6.5l-.7.7"/></svg></span></div><div class="val">38</div><div class="chg"><b>+5.2%</b> vs last month</div></div>
+        <div class="ui-kpi"><div class="top"><span class="lbl">Efficiency</span><span class="ic" style="background:#E8F5EE;color:#0E8F3E"><svg viewBox="0 0 24 24"><path d="m3 17 6-6 4 4 8-8M15 7h6v6"/></svg></span></div><div class="val">98.6%</div><div class="chg"><b>+3.4%</b> vs last month</div></div>
+      </div><h4>KPI cards</h4></div>
+    </div>
+  </section>
+
+  <!-- Selected screens -->
+  <section class="sec white">
+    <div class="g12 sc-head">
+      <h2>Selected screens</h2>
+      <div class="txt"><p>Screens from the dashboard and the mobile views. They cover reports, service tracking and unit records.</p></div>
+    </div>
+    <div class="big">
+      <div class="browser">
+        <div class="bar"><i></i><i></i><i></i><span>service-dashboard.app/service-overview</span></div>
+        <div class="view"><img src="hd/projects/service-dashboard/screen-1.jpg" alt="Service overview"></div>
+      </div>
+      <div class="cap">Service overview</div>
+    </div>
+    <div class="web3">
+      <div><div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="view"><img src="hd/projects/service-dashboard/subscription-report.jpg" alt="Subscription report"></div></div><div class="cap">Subscription report</div></div>
+      <div><div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="view"><img src="hd/projects/service-dashboard/screen-2.jpg" alt="Unit tracking"></div></div><div class="cap">Unit tracking</div></div>
+      <div><div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="view"><img src="hd/projects/service-dashboard/screen-3.jpg" alt="Maintenance history"></div></div><div class="cap">Maintenance history</div></div>
+    </div>
+  </section>
+
+  <section class="blue mob">
+    <h3>Mobile views</h3>
+    <div class="txt"><p>The mobile views use the same components as the web dashboard.</p></div>
+    <div class="phones">
+      <div><div class="phone"><div class="scr"><img src="hd/projects/service-dashboard/screen-4.jpg" alt="Mobile view"></div></div><div class="cap">Mobile view</div></div>
+      <div><div class="phone"><div class="scr"><img src="hd/projects/service-dashboard/screen-5.jpg" alt="Mobile details"></div></div><div class="cap">Mobile details</div></div>
+      <div><div class="phone"><div class="scr"><img src="hd/projects/service-dashboard/screen-6.jpg" alt="Mobile record"></div></div><div class="cap">Mobile record</div></div>
+    </div>
+  </section>
+
+  <!-- Challenges & solutions -->
+  <section class="sec white">
+    <h2>Challenges &amp; solutions</h2>
+    <div class="cs-grid txt">
+      <div>
+        <h3><i></i>Challenge</h3>
+        <p>The dashboard had to show dense operational data, and staff needed to scan open requests and SLA status quickly. Too much detail at once would slow them down. It would also hide the items that needed action first.</p>
+      </div>
+      <div class="sol">
+        <h3><i></i>Solution</h3>
+        <p>I set a clear information hierarchy that pushed the most actionable data to the top. I used calm and consistent status colours and kept the layout easy to scan. Staff could then read the state of the system and act in seconds.</p>
+      </div>
+    </div>
+    <div class="cs-shots">
+      <div><div class="ui ui-panel">
+        <div>
+          <h5>Recent Alerts</h5>
+          <table class="ui-table">
+            <tr><th>Time</th><th>Building</th><th>Event</th><th>Status</th></tr>
+            <tr><td>10:00 AM</td><td>Building A</td><td>High Power Consumption</td><td><span class="tag ok">Completed</span></td></tr>
+            <tr><td>09:46 AM</td><td>Building B</td><td>Outdoor Unit Error</td><td><span class="tag pr">In Progress</span></td></tr>
+            <tr><td>09:30 AM</td><td>Building C</td><td>Compressor Fault</td><td><span class="tag err">Failed</span></td></tr>
+            <tr><td>09:15 AM</td><td>Building D</td><td>Sensor Disconnected</td><td><span class="tag ok">Completed</span></td></tr>
+          </table>
+          <span class="all">View All</span>
+        </div>
+        <div>
+          <h5>Quick Actions</h5>
+          <div class="ui-qa">
+            <div><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 7h.01M15 7h.01M9 11h.01M15 11h.01"/></svg>Add New Building</div>
+            <div><svg viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M12 12v6M9 15h6"/></svg>Create Report</div>
+            <div><svg viewBox="0 0 24 24"><path d="m3 17 6-6 4 4 8-8"/></svg>Energy Overview</div>
+            <div><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><path d="M2 21a7 7 0 0 1 14 0M19 8v6M16 11h6"/></svg>Add New User</div>
+          </div>
+        </div>
+      </div><div class="cap">Recent alerts with status tags, next to quick actions.</div></div>
+      <div><div class="crop c-sub"><img src="hd/projects/service-dashboard/subscription-report.jpg" alt="Report settings grouped by section"></div><div class="cap">Report settings grouped into clear sections.</div></div>
+    </div>
+  </section>
+
+  <!-- Conclusion -->
+  <section class="sec blue">
+    <h2>Conclusion</h2>
+    <div class="con-grid">
+      <p>I built the dashboard directly in HTML. This kept the handoff simple for a smaller internal tool. It still followed the same component discipline that I use on larger projects.</p>
+      <p>The result is a dashboard that shows what needs attention first. For an internal ops tool, this matters more than any amount of visual polish.</p>
+    </div>
+  </section>
+
+
+  <div class="end">
+    <div class="crop logo"><img src="hd/projects/service-dashboard/screen-1.jpg" alt="ServiceDash"></div>
+    <span>Bishwajeet Gupta, Senior UI/UX Designer</span>
+  </div>
+
+</div>
+<script>
+  window.addEventListener('load', function () {
+    document.body.setAttribute('data-h', document.documentElement.scrollHeight);
+    var m = location.hash.match(/y=(\d+)/);
+    if (m) { document.querySelector('.page').style.marginTop = (-parseInt(m[1], 10)) + 'px'; }
+  });
+</script>
+</body>
+</html>

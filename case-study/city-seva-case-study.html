@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>City Seva App: Citizen Services App | Bishwajeet Gupta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* Palette sampled from the City Seva screens with System.Drawing GetPixel */
+  :root {
+    --blue: #1483f4;      /* splash background, primary buttons, date chips */
+    --orange: #f05a21;    /* logo mark, active admin tab */
+    --navy: #26395e;      /* wordmark and admin headings */
+    --steel: #496b96;     /* mobile screen titles */
+    --tint: #f3f9ff;      /* admin content background */
+    --white: #ffffff;
+    --text: #26395e;
+    --body: #4a5a76;
+    --line: #dbe6f3;
+    --pad: clamp(24px, 5.71vw, 80px);
+    --col-gap: clamp(16px, 2.29vw, 32px);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--white); color: var(--text); font-family: "Open Sans", "Segoe UI", Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+  img { display: block; max-width: 100%; }
+  .page { width: 100%; max-width: 1400px; margin: 0 auto; background: var(--white); }
+  section { position: relative; overflow: hidden; padding: var(--pad); }
+  .grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--col-gap); }
+
+  h2 { font-size: clamp(36px, 4.29vw, 60px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.05; color: var(--navy); }
+  p.body { font-size: clamp(16px, 1.29vw, 18px); line-height: 1.75; color: var(--body); }
+  p.body + p.body { margin-top: 18px; }
+  .list { list-style: none; margin-top: 28px; border-top: 1px solid var(--line); }
+  .list li { display: flex; gap: 16px; align-items: baseline; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: clamp(16px, 1.29vw, 18px); font-weight: 700; color: var(--navy); line-height: 1.45; }
+  .list li::before { content: ""; width: 8px; height: 8px; background: var(--blue); flex-shrink: 0; transform: translateY(-2px); }
+
+  /* device frames */
+  .phone { aspect-ratio: 375 / 812; background: #0f1a2e; border-radius: 13% / 6%; padding: 3.2%; box-shadow: 0 30px 60px rgba(15, 26, 46, .28); overflow: hidden; }
+  .phone .scr { width: 100%; height: 100%; border-radius: 10.5% / 4.9%; overflow: hidden; background: #fff; }
+  .phone .scr img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .browser { width: 100%; border-radius: 10px; overflow: hidden; background: #fff; box-shadow: 0 24px 50px rgba(15, 26, 46, .16); display: flex; flex-direction: column; }
+  .browser .bar { height: 34px; background: #e9eef5; display: flex; align-items: center; gap: 7px; padding: 0 14px; flex-shrink: 0; }
+  .browser .bar i { width: 11px; height: 11px; border-radius: 50%; background: #c3cedc; flex-shrink: 0; }
+  .browser .view { aspect-ratio: 1440 / 880; overflow: hidden; }
+  .browser .view img { width: 100%; height: 100%; object-fit: cover; object-position: top left; }
+
+  /* close-up crop of a real screenshot: --x, --y, --w, --h are pixels of the source, --sw is the source width */
+  .crop { position: relative; overflow: hidden; aspect-ratio: var(--w) / var(--h); background: #fff; border-radius: 12px; }
+  .crop img { position: absolute; max-width: none; width: calc(var(--sw) / var(--w) * 100%); left: calc(var(--x) / var(--w) * -100%); top: calc(var(--y) / var(--h) * -100%); }
+  .caption { font-size: 14px; font-weight: 600; color: var(--body); margin-top: 14px; }
+  .caption b { color: var(--navy); font-weight: 700; margin-right: 6px; }
+
+  /* real logo cropped from the splash screen */
+  .logo { width: 185px; height: 54px; position: relative; overflow: hidden; }
+  .logo img { position: absolute; max-width: none; width: 375px; left: -105px; top: -62px; }
+
+  /* ---------- Cover ---------- */
+  .cover { background: var(--blue); color: #fff; padding-bottom: 0; min-height: min(900px, 64.29vw); }
+  .cover .grid { align-items: end; }
+  .cover-text { grid-column: 1 / span 6; align-self: start; padding-bottom: var(--pad); }
+  .logo-plate { display: inline-block; background: #fff; border-radius: 10px; padding: 10px 16px 10px 10px; }
+  .cover .meta { margin-top: clamp(40px, 5.71vw, 80px); font-size: 15px; font-weight: 600; color: rgba(255,255,255,.85); }
+  .cover h1 { font-size: clamp(54px, 7.14vw, 100px); font-weight: 800; letter-spacing: -0.035em; line-height: .98; margin-top: 14px; }
+  .cover .sub { font-size: clamp(20px, 1.86vw, 26px); font-weight: 400; margin-top: 18px; color: #fff; }
+  .info { margin-top: clamp(40px, 5vw, 70px); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid rgba(255,255,255,.35); }
+  .info div { padding: 16px 16px 16px 0; border-bottom: 1px solid rgba(255,255,255,.35); }
+  .info div:nth-child(odd) { border-right: 1px solid rgba(255,255,255,.35); }
+  .info div:nth-child(even) { padding-left: 20px; }
+  .info .wide { grid-column: span 2; border-right: 0 !important; }
+  .info small { display: block; font-size: 13px; font-weight: 600; color: rgba(255,255,255,.75); margin-bottom: 4px; }
+  .info b { font-size: 18px; font-weight: 700; }
+  .cover-devices { grid-column: 7 / span 6; position: relative; height: 100%; min-height: min(780px, 55.71vw); }
+  .cover-devices .phone { position: absolute; bottom: max(-160px, -11.43vw); }
+  .cover-devices .p-back { width: min(300px, 21.43vw); right: 0; bottom: max(-60px, -4.29vw); }
+  .cover-devices .p-front { width: min(360px, 25.71vw); left: 4%; box-shadow: 0 40px 80px rgba(8, 40, 90, .45); }
+
+  /* ---------- Product ---------- */
+  .product { background: var(--tint); padding-top: clamp(48px, 5.71vw, 80px); }
+  .product .grid { align-items: end; margin-bottom: clamp(28px, 3.43vw, 48px); }
+  .product h2 { grid-column: 1 / span 6; }
+  .product p.body { grid-column: 8 / span 5; }
+  .product img.hero { width: 100%; border-radius: 12px; }
+
+  /* ---------- Overview ---------- */
+  .overview .grid { row-gap: 48px; }
+  .ov-text { grid-column: 1 / span 6; }
+  .ov-text h2 { margin-bottom: 28px; }
+  .ov-media { grid-column: 8 / span 5; }
+  .ov-media .crop { box-shadow: 0 20px 50px rgba(15, 26, 46, .12); border: 1px solid var(--line); }
+
+  /* ---------- Design approach ---------- */
+  .approach { background: var(--navy); color: #fff; }
+  .approach h2 { color: #fff; }
+  .approach p.body { color: rgba(255,255,255,.82); }
+  .approach .list { border-top-color: rgba(255,255,255,.2); }
+  .approach .list li { color: #fff; border-bottom-color: rgba(255,255,255,.2); }
+  .approach .list li::before { background: var(--orange); }
+  .ap-text { grid-column: 1 / span 5; }
+  .ap-text h2 { margin-bottom: 28px; }
+  .ap-media { grid-column: 7 / span 6; display: grid; grid-template-columns: 1fr 1fr; gap: var(--col-gap); align-content: start; }
+  .ap-media .crop { box-shadow: 0 20px 40px rgba(0,0,0,.25); }
+  .ap-media .tall { grid-row: span 2; }
+  .approach .caption { color: rgba(255,255,255,.7); }
+  .approach .caption b { color: #fff; }
+
+  /* ---------- Selected screens ---------- */
+  .screens-intro .grid { align-items: end; }
+  .screens-intro h2 { grid-column: 1 / span 6; }
+  .screens-intro p.body { grid-column: 8 / span 5; }
+  .lineup { background: var(--blue); padding-top: clamp(48px, 5.71vw, 80px); }
+  .lineup .head { display: flex; justify-content: space-between; color: #fff; font-size: 15px; font-weight: 700; margin-bottom: clamp(32px, 4vw, 56px); }
+  .lineup .head span:last-child { font-weight: 400; color: rgba(255,255,255,.8); }
+  .row5 { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--col-gap); align-items: start; }
+  .row5 figure:nth-child(even) { margin-top: min(72px, 5.14vw); }
+  .row5 figcaption, .web figcaption { margin-top: 16px; font-size: 15px; font-weight: 700; color: #fff; }
+  .row5 figcaption span, .web figcaption span { font-weight: 400; opacity: .75; margin-right: 8px; }
+  .web { background: var(--tint); }
+  .web .head { display: flex; justify-content: space-between; font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: clamp(28px, 3.43vw, 48px); }
+  .web .head span:last-child { font-weight: 400; color: var(--body); }
+  .web-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(32px, 4vw, 56px) var(--col-gap); }
+  .web-grid figure:nth-child(1) { grid-column: 1 / span 6; }
+  .web-grid figure:nth-child(2) { grid-column: 7 / span 6; }
+  .web-grid figure:nth-child(3) { grid-column: 1 / span 8; }
+  .web-grid .detail { grid-column: 9 / span 4; align-self: center; }
+  .web-grid .detail .crop { box-shadow: 0 24px 50px rgba(15, 26, 46, .2); }
+  .web figcaption { color: var(--navy); }
+
+  /* ---------- Challenges & solutions ---------- */
+  .cs .grid { row-gap: 40px; }
+  .cs h2 { grid-column: 1 / span 12; margin-bottom: clamp(8px, 1.43vw, 20px); }
+  .step { grid-column: span 5; padding-top: 22px; border-top: 4px solid var(--line); }
+  .step.solution { border-top-color: var(--blue); }
+  .step h3 { font-size: clamp(22px, 1.86vw, 26px); font-weight: 800; color: var(--navy); margin-bottom: 14px; }
+  .step.solution h3 { color: var(--blue); }
+  .step-arrow { grid-column: span 2; display: flex; align-items: center; justify-content: center; padding-top: 26px; }
+  .step-arrow svg { width: 100%; max-width: 120px; height: 24px; color: var(--blue); }
+  .cs-media { grid-column: 1 / span 12; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--col-gap); background: var(--tint); border-radius: 14px; padding: clamp(24px, 3.43vw, 48px); align-items: center; }
+  .cs-media .phone { grid-column: 2 / span 3; }
+  .cs-media .crop { grid-column: 6 / span 6; box-shadow: 0 20px 50px rgba(15, 26, 46, .12); border: 1px solid var(--line); }
+
+  /* ---------- Delivery ---------- */
+  .delivery { background: var(--tint); }
+  .delivery .grid { align-items: end; }
+  .delivery h2 { grid-column: 1 / span 6; }
+  .delivery .lead-col { grid-column: 8 / span 5; }
+  .track { margin-top: clamp(40px, 4.57vw, 64px); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--col-gap); position: relative; }
+  .track::before { content: ""; position: absolute; left: 0; right: 0; top: 9px; height: 2px; background: var(--blue); }
+  .stage { position: relative; padding-top: 40px; }
+  .stage::before { content: ""; position: absolute; left: 0; top: 0; width: 20px; height: 20px; border-radius: 50%; background: #fff; border: 5px solid var(--blue); box-sizing: border-box; }
+  .stage:last-child::before { background: var(--blue); }
+  .stage .when { font-size: 14px; font-weight: 700; color: var(--blue); }
+  .stage h3 { font-size: clamp(20px, 1.71vw, 24px); font-weight: 800; color: var(--navy); margin: 6px 0 10px; }
+  .stage p { font-size: 16px; line-height: 1.65; color: var(--body); }
+  .duration { margin-top: clamp(36px, 4vw, 56px); display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; padding-top: 24px; border-top: 1px solid var(--line); }
+  .duration b { font-size: clamp(40px, 4.29vw, 60px); font-weight: 800; color: var(--blue); letter-spacing: -0.02em; line-height: 1; }
+  .duration span { font-size: 18px; font-weight: 600; color: var(--navy); }
+
+  /* ---------- Conclusion ---------- */
+  .conclusion .grid { row-gap: 32px; }
+  .conclusion h2 { grid-column: 1 / span 12; }
+  .con-a { grid-column: 1 / span 6; }
+  .con-b { grid-column: 7 / span 6; margin-top: 0 !important; }
+  .closing { margin-top: clamp(40px, 5vw, 70px); background: var(--blue); border-radius: 14px; padding: clamp(28px, 4vw, 56px) clamp(24px, 4vw, 56px) 0; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--col-gap); align-items: end; overflow: hidden; }
+  .closing .browser { grid-column: 1 / span 8; border-radius: 10px 10px 0 0; box-shadow: none; }
+  .closing .phone { grid-column: 9 / span 3; margin-bottom: clamp(24px, 3.43vw, 48px); }
+  .credit { display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; align-items: center; margin-top: clamp(32px, 3.43vw, 48px); padding-top: 22px; border-top: 1px solid var(--line); font-size: 14px; font-weight: 600; color: var(--body); }
+
+  /* ---------- Related work ---------- */
+  .related { background: var(--navy); color: #fff; }
+  .related h2 { color: #fff; }
+  .rel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--col-gap); margin-top: clamp(28px, 3.43vw, 48px); }
+  .rel .im { border-radius: 12px; overflow: hidden; aspect-ratio: 3 / 2; }
+  .rel .im img { width: 100%; height: 100%; object-fit: cover; }
+  .rel .rtags { margin: 20px 0 8px; font-size: 13px; font-weight: 700; letter-spacing: .06em; color: rgba(255,255,255,.7); }
+  .rel .rtags span + span::before { content: "/"; margin: 0 10px; color: var(--orange); }
+  .rel h3 { font-size: clamp(22px, 2vw, 28px); font-weight: 800; }
+
+  /* ================= Responsive ================= */
+  @media (max-width: 1200px) {
+    .ap-text { grid-column: 1 / span 12; margin-bottom: 40px; }
+    .ap-media { grid-column: 1 / span 12; grid-template-columns: 1fr 1fr 1fr; }
+    .ap-media .tall { grid-row: auto; }
+    .ap-text .list { columns: 2; column-gap: var(--col-gap); }
+    .ap-text .list li { break-inside: avoid; }
+  }
+  @media (max-width: 1024px) {
+    .cover { min-height: 0; }
+    .cover-text { grid-column: 1 / span 12; }
+    .cover-devices { grid-column: 1 / span 12; min-height: 0; height: 78vw; }
+    .cover-devices .p-front { width: 36vw; left: 12%; bottom: -14vw; }
+    .cover-devices .p-back { width: 30vw; right: 12%; bottom: -6vw; }
+    .product h2, .product p.body, .screens-intro h2, .screens-intro p.body, .delivery h2, .delivery .lead-col { grid-column: 1 / span 12; }
+    .product p.body, .screens-intro p.body, .delivery .lead-col { margin-top: 20px; }
+    .ov-text { grid-column: 1 / span 12; }
+    .ov-media { grid-column: 2 / span 10; }
+    .row5 { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px var(--col-gap); }
+    .row5 figure { flex: 0 0 calc((100% - 2 * var(--col-gap)) / 3); }
+    .row5 figure:nth-child(even) { margin-top: 0; }
+    .web-grid figure:nth-child(1), .web-grid figure:nth-child(2) { grid-column: span 12; }
+    .web-grid figure:nth-child(3) { grid-column: 1 / span 12; }
+    .web-grid .detail { grid-column: 3 / span 8; }
+    .track { grid-template-columns: 1fr 1fr; row-gap: 40px; }
+    .track::before { display: none; }
+    .stage { border-top: 2px solid var(--blue); padding-top: 32px; }
+    .stage::before { top: -11px; }
+    .cs-media .phone { grid-column: 1 / span 4; }
+    .cs-media .crop { grid-column: 5 / span 8; }
+  }
+  @media (max-width: 768px) {
+    .step { grid-column: 1 / span 12; }
+    .step-arrow { grid-column: 1 / span 12; padding-top: 0; justify-content: flex-start; }
+    .step-arrow svg { transform: rotate(90deg); width: 40px; }
+    .con-a, .con-b { grid-column: 1 / span 12; }
+    .conclusion .grid { row-gap: 18px; }
+    .closing .browser { grid-column: 1 / span 12; }
+    .closing .phone { display: none; }
+    .rel-grid { grid-template-columns: 1fr; }
+    .ap-media { grid-template-columns: 1fr 1fr; }
+    .ap-text .list { columns: 1; }
+    .info b { font-size: 16px; }
+  }
+  @media (max-width: 480px) {
+    .info { grid-template-columns: 1fr; }
+    .info div { border-right: 0 !important; padding-left: 0 !important; }
+    .info .wide { grid-column: auto; }
+    .cover-devices { height: 92vw; }
+    .cover-devices .p-front { width: 46vw; left: 4%; bottom: -18vw; }
+    .cover-devices .p-back { width: 38vw; right: 4%; bottom: -8vw; }
+    .row5 figure { flex: 0 0 calc((100% - var(--col-gap)) / 2); }
+    .ap-media { grid-template-columns: 1fr; }
+    .track { grid-template-columns: 1fr; }
+    .cs-media .phone { grid-column: 3 / span 8; }
+    .cs-media .crop { grid-column: 1 / span 12; }
+    .ov-media, .web-grid .detail { grid-column: 1 / span 12; }
+    .logo { transform: scale(.85); transform-origin: left center; }
+    .web .head, .lineup .head { flex-direction: column; gap: 4px; }
+  }
+
+  /* Related work: 2 columns from 768px (Bootstrap md), 1 column below */
+  @media (min-width: 768px) {
+    .rel-grid { grid-template-columns: 1fr 1fr; }
+    .g12 > .rel { grid-column: span 6; }
+    .g12 > .rel + .rel { margin-top: 0; }
+  }
+  @media (max-width: 767.98px) {
+    .rel-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Cover -->
+  <section class="cover">
+    <div class="grid">
+      <div class="cover-text">
+        <div class="logo-plate"><div class="logo"><img src="hd/projects/city-seva/splash.jpg" alt="City Seva logo"></div></div>
+        <div class="meta">Mobile App / Citizen Services</div>
+        <h1>City Seva App</h1>
+        <div class="sub">Citizen Services App</div>
+        <div class="info">
+          <div><small>Client</small><b>Academic Institution</b></div>
+          <div><small>Category</small><b>Citizen Services App</b></div>
+          <div><small>Tools</small><b>Figma</b></div>
+          <div><small>Status</small><b>Live</b></div>
+          <div class="wide"><small>Scope</small><b>Web &amp; mobile app UI design</b></div>
+        </div>
+      </div>
+      <div class="cover-devices">
+        <div class="phone p-back"><div class="scr"><img src="hd/projects/city-seva/splash.jpg" alt="Splash"></div></div>
+        <div class="phone p-front"><div class="scr"><img src="hd/projects/city-seva/home.jpg" alt="Home"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product mockup -->
+  <section class="product">
+    <div class="grid">
+      <h2>Web portal, iOS and Android</h2>
+      <p class="body">The resident app and the admin web portal share one consistent visual style across web and mobile.</p>
+    </div>
+    <img class="hero" src="hd/portfolios/hero-city-seva.jpg" alt="City Seva App desktop and mobile mockup">
+  </section>
+
+  <!-- Overview -->
+  <section class="overview">
+    <div class="grid">
+      <div class="ov-text">
+        <h2>Overview</h2>
+        <p class="body">An academic institution wanted an app for the residents of its city. With it, people could easily find the information and services they need in daily life, such as education, health and transportation. The institution offered the app as a public service to local citizens.</p>
+        <p class="body">The client did not want a ready-made product. They wanted a simple, easy-to-use app with minimal navigation and a custom look and feel. I designed the user interface for the web portal and for the iOS and Android apps. I kept every screen clear, so residents could quickly find the service they need.</p>
+        <ul class="list">
+          <li>UI design for the web portal and mobile apps</li>
+          <li>Simple navigation and a clean custom interface</li>
+          <li>Service screens grouped around resident needs</li>
+          <li>Delivered in about 3 months</li>
+        </ul>
+      </div>
+      <figure class="ov-media">
+        <div class="crop" style="--sw:375; --x:8; --y:282; --w:360; --h:372"><img src="hd/projects/city-seva/home.jpg" alt="Available services on the Home screen"></div>
+        <figcaption class="caption"><b>Home screen detail.</b>Healthcare, Transport, Household, Education, Emergency and Grievance in one grid.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Design approach -->
+  <section class="approach">
+    <div class="grid">
+      <div class="ap-text">
+        <h2>Design approach</h2>
+        <p class="body">The app gives city residents one place to reach important services. I kept the interface basic and easy to use, so people can find what they need with as few taps as possible. Requirements were discussed over email, Zoom calls and face-to-face meetings. I shared the screens for review as the app took shape.</p>
+        <ul class="list">
+          <li>Clear, flat navigation for a wide public audience</li>
+          <li>Plain labels and simple screen layouts</li>
+          <li>Consistent visual style across web and mobile</li>
+          <li>Service information grouped the way residents think</li>
+        </ul>
+      </div>
+      <div class="ap-media">
+        <figure class="tall">
+          <div class="crop" style="--sw:375; --x:8; --y:118; --w:360; --h:400"><img src="hd/projects/city-seva/select-specialisation.jpg" alt="Specialisation grid"></div>
+          <figcaption class="caption"><b>Select specialisation.</b>Plain labels with one icon each.</figcaption>
+        </figure>
+        <figure>
+          <div class="crop" style="--sw:375; --x:8; --y:122; --w:360; --h:112"><img src="hd/projects/city-seva/home.jpg" alt="Upcoming booking card"></div>
+          <figcaption class="caption"><b>Upcoming booking.</b>Date and time at a glance.</figcaption>
+        </figure>
+        <figure>
+          <div class="crop" style="--sw:375; --x:8; --y:70; --w:360; --h:170"><img src="hd/projects/city-seva/signup-details.jpg" alt="Language and phone number fields"></div>
+          <figcaption class="caption"><b>Sign-up.</b>Language choice first.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Selected screens -->
+  <section class="screens-intro">
+    <div class="grid">
+      <h2>Selected screens</h2>
+      <p class="body">Screens from the resident mobile app and the admin portal, from sign-up and home to service booking and user management.</p>
+    </div>
+  </section>
+
+  <section class="lineup">
+    <div class="head"><span>Resident mobile app</span><span>5 screens</span></div>
+    <div class="row5">
+      <figure><div class="phone"><div class="scr"><img src="hd/projects/city-seva/splash.jpg" alt="Splash"></div></div><figcaption><span>01</span>Splash</figcaption></figure>
+      <figure><div class="phone"><div class="scr"><img src="hd/projects/city-seva/home.jpg" alt="Home"></div></div><figcaption><span>02</span>Home</figcaption></figure>
+      <figure><div class="phone"><div class="scr"><img src="hd/projects/city-seva/signup-details.jpg" alt="Sign-up"></div></div><figcaption><span>03</span>Sign-up</figcaption></figure>
+      <figure><div class="phone"><div class="scr"><img src="hd/projects/city-seva/select-specialisation.jpg" alt="Select specialisation"></div></div><figcaption><span>04</span>Select specialisation</figcaption></figure>
+      <figure><div class="phone"><div class="scr"><img src="hd/projects/city-seva/details-page.jpg" alt="Details"></div></div><figcaption><span>05</span>Details</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="web">
+    <div class="head"><span>Admin web portal</span><span>3 screens</span></div>
+    <div class="web-grid">
+      <figure><div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="view"><img src="hd/projects/city-seva/booking-details.jpg" alt="Booking details"></div></div><figcaption><span>06</span>Booking details</figcaption></figure>
+      <figure><div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="view"><img src="hd/projects/city-seva/user-info.jpg" alt="User info"></div></div><figcaption><span>07</span>User info</figcaption></figure>
+      <figure><div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="view"><img src="hd/projects/city-seva/users.jpg" alt="Service categories"></div></div><figcaption><span>08</span>Service categories</figcaption></figure>
+      <figure class="detail">
+        <div class="crop" style="--sw:1469; --x:516; --y:207; --w:438; --h:450"><img src="hd/projects/city-seva/users.jpg" alt="Add category form"></div>
+        <figcaption class="caption"><b>Detail.</b>Add category form in the admin portal.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Challenges & solutions -->
+  <section class="cs">
+    <div class="grid">
+      <h2>Challenges &amp; solutions</h2>
+      <div class="step">
+        <h3>Challenge</h3>
+        <p class="body">The app had to serve everyday residents of many ages, with different comfort levels using phones. The client asked for minimal navigation, so people needed to reach education, health and transport information without any confusion.</p>
+      </div>
+      <div class="step-arrow"><svg viewBox="0 0 120 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h114M104 2l12 10-12 10"/></svg></div>
+      <div class="step solution">
+        <h3>Solution</h3>
+        <p class="body">I kept the structure flat and the labels plain. I grouped the services the way residents actually think about them and reduced the taps needed to reach each service. This kept the app simple and easy to use for a wide public audience.</p>
+      </div>
+      <div class="cs-media">
+        <div class="phone"><div class="scr"><img src="hd/projects/city-seva/details-page.jpg" alt="Details"></div></div>
+        <div class="crop" style="--sw:375; --x:8; --y:96; --w:360; --h:140"><img src="hd/projects/city-seva/details-page.jpg" alt="Service provider header with call and WhatsApp numbers"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Delivery -->
+  <section class="delivery">
+    <div class="grid">
+      <h2>Delivery</h2>
+      <div class="lead-col"><p class="body">The design was delivered in about 3 months. The client shared a completion certificate at the end.</p></div>
+    </div>
+    <div class="track">
+      <div class="stage"><div class="when">Start</div><h3>Requirements</h3><p>Requirements were discussed over email, Zoom calls and face-to-face meetings.</p></div>
+      <div class="stage"><div class="when">During design</div><h3>Screens for review</h3><p>I shared the screens for review as the app took shape, for the web portal and the iOS and Android apps.</p></div>
+      <div class="stage"><div class="when">Handover</div><h3>Completion certificate</h3><p>The design was delivered and the client shared a completion certificate.</p></div>
+      <div class="stage"><div class="when">Now</div><h3>Live</h3><p>The app is live for city residents on the web and on mobile.</p></div>
+    </div>
+    <div class="duration"><b>About 3 months</b><span>from requirements to completion</span></div>
+  </section>
+
+  <!-- Conclusion -->
+  <section class="conclusion">
+    <div class="grid">
+      <h2>Conclusion</h2>
+      <p class="body con-a">The app is live for city residents on a web portal and on mobile apps for iOS and Android. Its simple, low-navigation interface makes it easy for a wide public audience to reach education, health and transport information.</p>
+      <p class="body con-b">The design was delivered in about 3 months, and the client shared a completion certificate. The clean, consistent screens give residents an easy way to use the services every day.</p>
+    </div>
+    <div class="closing">
+      <div class="browser"><div class="bar"><i></i><i></i><i></i></div><div class="view"><img src="hd/projects/city-seva/user-info.jpg" alt="User info"></div></div>
+      <div class="phone"><div class="scr"><img src="hd/projects/city-seva/home.jpg" alt="Home"></div></div>
+    </div>
+    <div class="credit"><div class="logo"><img src="hd/projects/city-seva/splash.jpg" alt="City Seva logo"></div><span>Bishwajeet Gupta, Senior UI/UX Designer</span><span>Academic Institution · Figma</span></div>
+  </section>
+
+
+</div>
+<script>
+  window.addEventListener('load', function () {
+    document.body.setAttribute('data-h', document.documentElement.scrollHeight);
+    var m = location.hash.match(/y=(\d+)/);
+    if (m) { document.querySelector('.page').style.marginTop = (-parseInt(m[1], 10)) + 'px'; }
+  });
+</script>
+</body>
+</html>
